@@ -1,0 +1,33 @@
+/*nav*/
+.bgNavColor {
+    background-color:#64F7E0 !important;
+    border-bottom: 4px solid #505b59 !important;
+}
+
+.navLinkColor {
+    color: #505b59;
+    font-weight: bold;
+    font-family: arial;
+}
+
+/*Index Page*/
+
+.homePageJumbo {
+    background-image: url("../../images/jumb.png");
+    background-repeat:no-repeat;
+    background-size: 100%;
+    margin-top: -5%;
+}
+
+.jumboBox {
+    background-color: black;
+    padding: 20px;
+    opacity: 0.6;
+    border: 2px solid;
+    border-radius: 5px;
+    margin-top: 3%;
+}
+
+.jumboBox h2, .jumboBox p {
+    color:white;
+}

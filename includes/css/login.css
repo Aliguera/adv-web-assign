@@ -1,0 +1,67 @@
+/*nav*/
+.bgNavColor {
+    background-color:#64F7E0 !important;
+    border-bottom: 4px solid #505b59 !important;
+}
+
+.navLinkColor {
+    color: #505b59;
+    font-weight: bold;
+    font-family: arial;
+}
+
+/*Login Page*/
+
+.img-size-div {
+  height: 0;
+  overflow: hidden;
+  padding-top: 66.6666%;
+  position: relative;
+}
+
+.img-size {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+    background-color: black;
+    border: 2px solid;
+    border-radius: 5px;
+    margin-top: 3%;
+}
+
+.img-size-div h3 {
+    text-align:center;
+}
+
+.col-lg-4 {
+    margin-top: 50px;
+}
+
+.login-card-header {
+    text-align: center;
+    font-family: arial;
+    color:white;
+    padding:10px;
+}
+
+.login-header {
+    text-align: center;
+    font-family: arial;
+    margin-top:20px;
+}
+
+.wanna-help-h3 {
+    color: black !important;
+    text-align: center;
+    font-family: arial;
+    padding:10px;
+}
+
+.wanna-help-card {
+    background-color: white;
+}

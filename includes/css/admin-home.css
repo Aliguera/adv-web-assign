@@ -1,0 +1,14 @@
+body {
+    font-family: arial;
+}
+
+h1 {
+    text-align: center;
+}
+
+.webStatus {
+    color: green;
+    margin-left: 20px;
+    font-size: 25px;
+    font-family: arial;
+}
