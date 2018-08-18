@@ -1,4 +1,5 @@
 <?php
+    session_start();
     //include autoloader
     include('../autoloader.php');
     
@@ -38,6 +39,7 @@ $css_page = "<link rel='stylesheet' href='../includes/css/organization-register.
 <html>
     <?php include('head.php') ?>
     <body style="padding-top:64px;">
+        <?php include('../includes/admin-navbar.php') ?>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4 offset-md-4">

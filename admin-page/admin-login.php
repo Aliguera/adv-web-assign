@@ -1,25 +1,23 @@
 <?php
     //include autoloader
     include('../autoloader.php');
-    
-    //check request method
-    //if request is a POST request
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        //handle sign up here
-        $admin = new Admin();
-        //receive post variables from form
+    if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        //sign user up
-        $login = $admin -> login($email, $password);
-        if($login == true) {
-            //signup succeeded
-            echo "login successfull";
+        
+        $admin = new Admin();
+        $success = $admin -> authenticate($email, $password);
+        if( $success == true) {
+            //login successful
+            session_start();
+            $_SESSION['admin_email'] = $email;
+            //redirect user to home page
+            header("location: admin-home.php");
         } else {
-            //signup failed
-            //get the errors and show to user
-            echo "login failed";
+            $message = 'Wrong credentials supplied';
+            $message_class = 'warning';
         }
+        
     }
 ?>
 
@@ -36,9 +34,19 @@ $css_page = "<link rel='stylesheet' href='../includes/css/admin-login.css'>";
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4 offset-md-4">
+                    <?php
+                        if( $message ) {
+                            echo "<div class=\"alert alert-$message_class alert-dismissable fade show mt-3\">
+                                    $message
+                                    <button class=\"close\" data-dismiss=\"alert\"&times;>
+                                        
+                                    </button>
+                                </div>";
+                        }
+                    ?>
                     <form id="admin-login-form" method="post" action="admin-login.php">
-                      <h2>Welcome to the Help People Admin Page!</h2>
-                       <h4>Log in to manage Help People Website</h4>
+                      <h2>Welcome to the Help2Day Admin Page</h2>
+                       <h4>Log in to manage Help2Day Website</h4>
                        <div class="form-group">
                            <label for="email">Email Address</label>
                            <input class="form-control" type="email" name="email" id="email" placeholder="you@example.com">

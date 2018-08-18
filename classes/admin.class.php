@@ -38,33 +38,33 @@
             }
         }
         
-        // public function login($email, $password){
-        //     //create array to store errors
-        //     $errors = array();
-        //     //validate email
-        //     // if(filter_var($email, FILTER_VALIDADE_EMAIL) == false) {
-        //     //     $errors['email'] = 'invalid email address';
-        //     // }
-        //     //check password length
-        //     // if (strlen($password) < 6){
-        //     //     $errors['password'] = 'minimum 6 characters';
-        //     // }
-        //     if (strlen($password) < 6){
-        //         echo 'Error: password is too short!';
-        //     }
-        //     //check if there are no errors
-        //     if(count($errors) == 0){
-        //         //proceed and create account
-        //         $query = "SELECT * FROM users WHERE email = ? AND password = ?";
-        //         // $hash = password_hash($password, PASSWORD_DEFAULT);
-        //         $statement = $this -> connection -> prepare($query);
-        //         // $statement -> bind_param('ss', $email, $hash);
-        //         $statement -> bind_param('ss', $email, $password);
-        //         $success = $statement -> execute() ? true : false;
-        //         return $success;
-        //     } else {
-        //         return false;
-        //     }
-        // }
+        public function authenticate($email, $password) {
+            $query = 'SELECT email, password, fullname, user_level
+                      FROM users 
+                      WHERE email = ? AND user_level = 2';
+                      $statement = $this -> connection -> prepare($query);
+                      $statement -> bind_param('s', $email);
+                      $statement -> execute();
+                      $result = $statement -> get_result();
+                      if( $result -> num_rows == 0) {
+                          //account does not exist
+                          return false;
+                      } else {
+                          $admin = $result -> fetch_assoc();
+                          $email = $admin['email'];
+                          $hash = $admin['password'];
+                          $fullname = $admin['fullname'];
+                          $user_level = $admin['user_level'];
+                          $_SESSION['user_level'] = $user_level;
+                          $match = password_verify( $password, $hash );
+                          if ( $match == true ) {
+                              //password is correct
+                              return true;
+                          } else {
+                              //wrong password
+                              return false;
+                          }
+                      }
+        }
     }
 ?>

@@ -1,9 +1,9 @@
 <?php
     class Database{
-        private $username = "aligao";
-        private $password = "";
-        private $dbhost = "localhost";
-        private $dbname = "help_people";
+        private $username;
+        private $password;
+        private $dbhost;
+        private $dbname;
         protected $connection;
         
         public function __construct(){
@@ -11,8 +11,7 @@
             $this -> password = getenv("dbpassword");
             $this -> dbhost = getenv("dbhost");
             $this -> dbname = getenv("dbname");
-            $this -> connection = mysqli_connect('localhost', 'aligao', '', 'help_people');
-            // $this -> connection = mysqli_connect($this -> dbhost, $this -> username, $this -> password, $this -> dbname);
+            $this -> connection = mysqli_connect($this -> dbhost, $this -> username, $this -> password, $this -> dbname);
         }
         
     }

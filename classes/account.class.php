@@ -36,5 +36,33 @@
                 return false;
             }
         }
+        
+        public function authenticate($email, $password) {
+            $query = 'SELECT email, password, fullname, user_level
+                      FROM users 
+                      WHERE email = ? AND user_level = 1';
+                      $statement = $this -> connection -> prepare($query);
+                      $statement -> bind_param('s', $email);
+                      $statement -> execute();
+                      $result = $statement -> get_result();
+                      if( $result -> num_rows == 0) {
+                          //account does not exist
+                          return false;
+                      } else {
+                          $account = $result -> fetch_assoc();
+                          $email = $account['email'];
+                          $hash = $account['password'];
+                          $fullname = $account['fullname'];
+                          $user_level = $account['user_level'];
+                          $match = password_verify( $password, $hash );
+                          if ( $match == true ) {
+                              //password is correct
+                              return true;
+                          } else {
+                              //wrong password
+                              return false;
+                          }
+                      }
+        }
     }
 ?>

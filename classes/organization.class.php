@@ -37,5 +37,35 @@
                 return false;
             }
         }
+        
+        public function authenticate($email, $password) {
+            $query = 'SELECT email, password, name, description, abn, address
+                      FROM organizations 
+                      WHERE email = ?';
+                      $statement = $this -> connection -> prepare($query);
+                      $statement -> bind_param('s', $email);
+                      $statement -> execute();
+                      $result = $statement -> get_result();
+                      if( $result -> num_rows == 0) {
+                          //account does not exist
+                          return false;
+                      } else {
+                          $organization = $result -> fetch_assoc();
+                          $email = $organization['email'];
+                          $hash = $organization['password'];
+                          $name = $organization['name'];
+                          $description = $organization['description'];
+                          $abn = $organization['abn'];
+                          $address = $organization['address'];
+                          $match = password_verify( $password, $hash );
+                          if ( $match == true ) {
+                              //password is correct
+                              return true;
+                          } else {
+                              //wrong password
+                              return false;
+                          }
+                      }
+        }
     }
 ?>

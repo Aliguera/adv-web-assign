@@ -1,4 +1,27 @@
 <?php
+    //include autoloader
+    include('autoloader.php');
+    if ( $_SERVER['REQUEST_METHOD'] == 'POST') {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        
+        $account = new Account();
+        $success = $account -> authenticate($email, $password);
+        if( $success == true) {
+            //login successful
+            session_start();
+            $_SESSION['user_email'] = $email;
+            //redirect user to home page
+            header("location: index.php");
+        } else {
+            $message = 'Wrong credentials supplied';
+            $message_class = 'warning';
+        }
+        
+    }
+?>
+
+<?php
 $page_title = "Help People";
 $css_page = "<link rel='stylesheet' href='includes/css/login-help.css'>";
 ?>
@@ -10,7 +33,17 @@ $css_page = "<link rel='stylesheet' href='includes/css/login-help.css'>";
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4 offset-md-4">
-                    <form id="signup-form" method="post" action="signup.php">
+                    <?php
+                        if( $message ) {
+                            echo "<div class=\"alert alert-$message_class alert-dismissable fade show mt-3\">
+                                    $message
+                                    <button class=\"close\" data-dismiss=\"alert\"&times;>
+                                        
+                                    </button>
+                                </div>";
+                        }
+                    ?>
+                    <form id="login-form" method="post" action="login-help.php">
                        <h3>Log in to Help</h3>
                        <div class="form-group">
                            <label for="email">Email Address</label>
@@ -21,7 +54,7 @@ $css_page = "<link rel='stylesheet' href='includes/css/login-help.css'>";
                            <input class="form-control" type="password" name="password" id="password" placeholder="Minimum 6 characters">
                        </div>
                        <button class="btn btn-danger" type="submit">Clear</button>
-                       <button class="btn btn-primary" type="submit">Login</button>
+                       <button class="btn btn-primary" type="submit">Sign In</button>
                     </form>
                 </div>
             </div>

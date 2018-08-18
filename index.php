@@ -1,4 +1,5 @@
 <?php
+session_start();
 $page_title = "Help People";
 $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
 ?>

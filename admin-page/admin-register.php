@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    //doest allow users to get to the page before logging in
+    if (!$_SESSION['email']) {
+        header("location: admin-login.php");
+    }
     //include autoloader
     include('../autoloader.php');
     
@@ -35,6 +40,7 @@ $css_page = "<link rel='stylesheet' href='../includes/css/company-register.css'>
 <html>
     <?php include('head.php') ?>
     <body style="padding-top:64px;">
+        <?php include('../includes/admin-navbar.php') ?>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4 offset-md-4">
