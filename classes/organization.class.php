@@ -1,5 +1,6 @@
 <?php
     class Organization extends Database {
+        public $organizations = array();
         public $errors = array();
         public function __construct(){
             parent::__construct();
@@ -66,6 +67,25 @@
                               return false;
                           }
                       }
+        }
+        
+        public function getOrganizations() {
+            $query = "  SELECT 
+                        id,
+                        name,
+                        description,
+                        address,
+                        profile_image
+                        FROM `organizations`";
+                        
+            $statement = $this -> connection -> prepare($query);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            while( $row = $result -> fetch_assoc() ) {
+                array_push( $this -> organizations, $row );
+            }
+            
+            return $this -> organizations;
         }
     }
 ?>

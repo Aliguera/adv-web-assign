@@ -16,7 +16,7 @@ $css_page = "<link rel='stylesheet' href='../includes/css/admin-home.css'>";
     ?>
     <body style="padding-top: 64px;">
         <?php include('../includes/admin-navbar.php') ?>
-        <div class="container-fluid">
+        <div class="container">
             <h1>Welcome to Help2Day Admin Page</h1>
             <br><br>
             <h3>Registration</h3>
