@@ -1,7 +1,7 @@
 <?php
   session_start();
   //doest allow users to get to the page before logging in
-  if (!$_SESSION['user_email'] && !$_SESSION['organization_email']) {
+  if (!$_SESSION['organization_email']) {
       header("location: index.php");
   }
   
@@ -11,8 +11,8 @@
   $orgns = new Organization();
   $organizations = $orgns -> getOrganizations();
   
-  $page_title = "Help-List Page";
-  $css_page = "<link rel='stylesheet' href='includes/css/help-list.css'>";
+  $page_title = "Organization Profile Page";
+  $css_page = "<link rel='stylesheet' href='includes/css/organization-profile.css'>";
   ?>
 <!doctype html>
 <html>

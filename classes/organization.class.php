@@ -74,7 +74,6 @@
                         id,
                         name,
                         description,
-                        address,
                         profile_image
                         FROM `organizations`";
                         

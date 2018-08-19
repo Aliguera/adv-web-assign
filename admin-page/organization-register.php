@@ -1,5 +1,9 @@
 <?php
     session_start();
+    //doest allow users to get to the page before logging in
+    if (!$_SESSION['admin_email']) {
+        header("location: admin-login.php");
+    }
     //include autoloader
     include('../autoloader.php');
     
@@ -20,7 +24,7 @@
         if($organization_register == true) {
             //signup succeeded
             //organization register succeeded
-            $message = "You have successfully created your user!";
+            $message = "You have successfully registered an organization!";
             $message_class = "success";
         } else {
             //signup failed

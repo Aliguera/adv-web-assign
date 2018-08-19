@@ -1,12 +1,11 @@
 /*nav*/
 .bgNavColor {
-    background-color:#64F7E0 !important;
+    background-color:#003366 !important;
     border-bottom: 4px solid #505b59 !important;
 }
 
-.navLinkColor {
-    color: #505b59;
-    font-weight: bold;
+.nav-link-color {
+    color: white;
     font-family: arial;
 }
 

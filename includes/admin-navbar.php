@@ -1,5 +1,5 @@
 <?php
-    if(isset($_SESSION['email'])) {
+    if(isset($_SESSION['admin_email'])) {
         $navs = array(
                 'Home' => 'admin-home.php',
                 'Log Out' => 'admin-logout.php'

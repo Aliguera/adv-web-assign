@@ -1,7 +1,7 @@
 <?php
     session_start();
     //doest allow users to get to the page before logging in
-    if (!$_SESSION['email']) {
+    if (!$_SESSION['admin_email']) {
         header("location: admin-login.php");
     }
     //include autoloader
