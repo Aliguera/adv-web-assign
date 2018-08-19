@@ -21,7 +21,7 @@ $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
               </p>
           </div>
         </div>
-        <div class="container">
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-lg-4 mb-2">
                     <div class="card" style="width: 18rem;">
@@ -52,5 +52,40 @@ $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
                 </div>
             </div>
         </div>
+        <div class="home-box mt-5">
+          <div class="container">
+            <h1 class="text-center">Who are we?</h1>
+            <div class="row justify-content-center">
+              <div class="col-md-4">
+                <img src="images/home/about-us-alick.jpg" class="img-fluid" alt="Responsive image">
+              </div>
+              <div class="col-md-4">
+                <img src="images/home/about-us-victor.jpg" class="img-fluid" alt="Responsive image">
+              </div>
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui totam voluptates officiis nisi odio, incidunt tempora. Iure repellat nesciunt molestias eos magnam itaque, eveniet, sed magni ipsam eum perspiciatis repellendus.</p>
+          </div>
+        </div>
+        <div class="container">
+          <h1 class="text-center needs-help-header">Who needs your help?</h1>
+          <div class="needs-help-box">
+            <h3 class="text-center">Sick People</h3>
+            <img src="images/home/sick-people-home.png" class="rounded-circle" alt="Cinque Terre">
+            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eligendi ea voluptatibus laudantium, magnam enim praesentium est quam, et vero obcaecati odit voluptas vitae reiciendis qui rem mollitia expedita quod.</p>
+          </div>
+          <div class="needs-help-box">
+            <h3 class="text-center">Poor People</h3>
+            <img src="images/home/poor-people-home.jpg" class="rounded-circle" alt="Cinque Terre">
+            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eligendi ea voluptatibus laudantium, magnam enim praesentium est quam, et vero obcaecati odit voluptas vitae reiciendis qui rem mollitia expedita quod.</p>
+          </div>
+          <div class="needs-help-box">
+            <h3 class="text-center">Old People</h3>
+            <img src="images/home/old-people-home.jpg" class="rounded-circle" alt="Cinque Terre">
+            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eligendi ea voluptatibus laudantium, magnam enim praesentium est quam, et vero obcaecati odit voluptas vitae reiciendis qui rem mollitia expedita quod.</p>
+          </div>
+        </div>
+        <?php
+            include('includes/footer.php');
+        ?>
     </body>
 </html>

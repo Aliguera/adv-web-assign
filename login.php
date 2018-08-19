@@ -28,7 +28,7 @@ $css_page = "<link rel='stylesheet' href='includes/css/login.css'>";
                     <a style="text-align:center" href="user-signup.php">Don't you have an accout yet? Click to register!</a>
                 </div>
             </div><br><br><br>
-            <div class="row">
+            <div class="row mb-5">
                 <div class="col-md-4 offset-md-4">
                     <div class="card" style="width: 100%;">
                        <h3 class="login-card-header">I need help</h3>
@@ -41,5 +41,8 @@ $css_page = "<link rel='stylesheet' href='includes/css/login.css'>";
                 </div>
             </div>
         </div>
+        <?php
+            include('includes/footer.php');
+        ?>
     </body>
 </html>

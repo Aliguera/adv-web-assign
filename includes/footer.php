@@ -1,0 +1,1 @@
+<footer class="footer-copyright text-center py-3">Copyright &copy Help2Day 2018. All rights reserved.</footer>

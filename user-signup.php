@@ -75,5 +75,8 @@ $css_page = "<link rel='stylesheet' href='includes/css/user-signup.css'>";
                 </div>
             </div>
         </div>
+        <?php
+            include('includes/footer.php');
+        ?>
     </body>
 </html>

@@ -2,7 +2,7 @@
   session_start();
   //doest allow users to get to the page before logging in
   if (!$_SESSION['user_email'] && !$_SESSION['organization_email']) {
-      header("location: index.php");
+      header("location: login.php");
   }
   
   //include autoloader
@@ -36,14 +36,14 @@
                             <div class=\"card-body\">
                               <div class=\"row\">
                                     <div class=\"col-md-6\">
-                                        <div class=\"im-size-div\">
-                                          <img class\"img-size\" src=\"images/organizations/$organization_image\">
+                                        <div class=\"img-size-div\">
+                                          <img class=\"img-size\" src=\"images/organizations/$organization_image\">
                                         </div>
                                     </div>
                                     <div class=\"col-md-6\">
                                         <h3>$organization_name</h3>
                                         <p>$organization_description</p>
-                                        <a href=\"detail.php?organization_id=$organization_id\"><button class=\"btn btn-primary right\">View</button></a>
+                                        <a href=\"organization-details.php\"><button class=\"btn btn-primary right\">View</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -51,5 +51,10 @@
                 }
             ?>
         </div>
+        <?php
+            include('includes/footer.php');
+        ?>
     </body>
 </html>
+
+<!--<a href=\"detail.php?organization_id=$organization_id\"><button class=\"btn btn-primary right\">View</button></a>-->

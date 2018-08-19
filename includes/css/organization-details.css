@@ -1,7 +1,6 @@
 /*nav*/
 .bgNavColor {
     background-color:#003366 !important;
-    border-bottom: 4px solid #505b59 !important;
 }
 
 .nav-link-color {
@@ -37,13 +36,24 @@ body {
     background-color: black;
     opacity: 0.6;
     padding: 50px;
-    border-radius: 5px;
 }
 
 #organizationCarousel {
-    margin-top: -4px;
+    margin-top: -8px;
+    border-radius: 4px;
 }
 
 .btn-group {
     margin-left:41.6% !important;
+}
+
+h1 {
+    margin-top: 50px;
+}
+
+/*footer*/
+footer {
+    background-color:#003366;
+    color: white;
+    margin-top: 50px;
 }

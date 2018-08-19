@@ -59,5 +59,8 @@ $css_page = "<link rel='stylesheet' href='includes/css/login-help.css'>";
                 </div>
             </div>
         </div>
+        <?php
+            include('includes/footer.php');
+        ?>
     </body>
 </html>

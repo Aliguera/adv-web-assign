@@ -6,6 +6,7 @@
     }
     
     $page_title = "About Us Page";
+    $css_page = "<link rel='stylesheet' href='includes/css/about-us.css'>";
 ?>
 <!doctype html>
 <html>
@@ -15,4 +16,7 @@
     <body style="padding-top: 64px;">
         <?php include('includes/navbar.php') ?>
     </body>
+    <?php
+        include('includes/footer.php');
+    ?>
 </html>

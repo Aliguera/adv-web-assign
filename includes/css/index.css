@@ -1,7 +1,6 @@
 /*nav*/
 .bgNavColor {
-    background-color:#003366 !important;
-    border-bottom: 4px solid #505b59 !important;
+    background-color:#003366;
 }
 
 .nav-link-color {
@@ -9,13 +8,18 @@
     font-family: arial;
 }
 
+body {
+    font-family: arial, sans-serif;
+}
+
 /*Index Page*/
 
 .homePageJumbo {
     background-image: url("../../images/jumb.png");
     background-repeat:no-repeat;
-    background-size: 100%;
+    background-size: cover;
     margin-top: -5%;
+    height: 800px;
 }
 
 .jumboBox {
@@ -24,9 +28,47 @@
     opacity: 0.6;
     border: 2px solid;
     border-radius: 5px;
-    margin-top: 3%;
+    margin-top: 15%;
 }
 
 .jumboBox h2, .jumboBox p {
     color:white;
+}
+
+.home-box {
+    background-color: #003366;
+    padding: 50px;
+}
+
+.home-box .row {
+    margin-bottom: 30px;
+}
+
+.home-box img {
+    border-radius: 5px;
+}
+
+.home-box h1, .home-box p {
+    color: white;
+}
+
+.needs-help-header {
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.needs-help-box {
+    margin-bottom: 50px;
+}
+
+.rounded-circle {
+    width: 20%;
+    margin:auto;
+    margin-left: 40%;
+}
+
+footer {
+    background-color:#003366;
+    color: white;
+    
 }

@@ -113,5 +113,8 @@
             <button type="button" class="btn btn-success">Send Message</button>
             <button type="button" class="btn btn-primary">Interested</button>
         </div>
+        <?php
+            include('includes/footer.php');
+        ?>
     </body>
 </html>
