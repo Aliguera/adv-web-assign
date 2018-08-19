@@ -58,5 +58,8 @@ $css_page = "<link rel='stylesheet' href='includes/css/login-be-helped.css'>";
                 </div>
             </div>
         </div>
+        <?php
+            include('includes/footer.php');
+        ?>
     </body>
 </html>

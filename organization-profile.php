@@ -2,7 +2,7 @@
   session_start();
   //doest allow users to get to the page before logging in
   if (!$_SESSION['organization_email']) {
-      header("location: index.php");
+      header("location: login.php");
   }
   
   //include autoloader
@@ -51,5 +51,8 @@
                 }
             ?>
         </div>
+        <?php
+            include('includes/footer.php');
+        ?>
     </body>
 </html>
