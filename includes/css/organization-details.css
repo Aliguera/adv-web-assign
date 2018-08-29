@@ -51,6 +51,10 @@ h1 {
     margin-top: 50px;
 }
 
+img {
+    margin-top: -9px;
+}
+
 /*footer*/
 footer {
     background-color:#003366;

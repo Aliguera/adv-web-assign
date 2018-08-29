@@ -17,6 +17,7 @@
     } else {
         $navs = array(
                 'Home' => 'index.php',
+                'About Us' => 'about-us.php',
                 'Sign In' => 'login.php'
             );
     }

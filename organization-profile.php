@@ -9,7 +9,13 @@
   include('autoloader.php');
   //create instance of products class
   $orgns = new Organization();
-  $organizations = $orgns -> getOrganizations();
+  $organizationProfile = $orgns -> getOrganizationProfile();
+  
+  $name = $organizationProfile[0];
+  $description = $organizationProfile[1];
+  $abn = $organizationProfile[2];
+  $address = $organizationProfile[3];
+  $profile_image = $organizationProfile[4];
   
   $page_title = "Organization Profile Page";
   $css_page = "<link rel='stylesheet' href='includes/css/organization-profile.css'>";
@@ -22,34 +28,24 @@
     <body style="padding-top: 64px;">
         <?php include('includes/navbar.php') ?>
         <div class="container">
-            <?php
-                foreach( $organizations as $item ) {
-                    $organization_id = $item['id'];
-                    $organization_name = $item['name'];
-                    $organization_description = $item['description'];
-                    $organization_image = $item['profile_image'];
-                    
-                    echo "<div class=\"card mt-5\">
-                            <div class=\"card-header\">
-                              $organization_name
-                            </div>
-                            <div class=\"card-body\">
-                              <div class=\"row\">
-                                    <div class=\"col-md-6\">
-                                        <div class=\"im-size-div\">
-                                          <img class\"img-size\" src=\"images/organizations/$organization_image\">
-                                        </div>
-                                    </div>
-                                    <div class=\"col-md-6\">
-                                        <h3>$organization_name</h3>
-                                        <p>$organization_description</p>
-                                        <a href=\"detail.php?organization_id=$organization_id\"><button class=\"btn btn-primary right\">View</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                          </div>";
-                }
-            ?>
+            <div class="img-size-div">
+                <img class="profile-image img-responsive center-block" src="images/organizations/profile_image/<?php echo $profile_image ?>" class="img-fluid" alt="Responsive image">
+            </div>
+            <h1 class="text-center"><?php echo $name?></h1>
+            <div class="card">
+              <div class="card-body">
+                <h3>About Us</h3>
+                <?php echo $_SESSION['organization_description'] ?>
+                <p><?php echo $description?></p>
+                <h3>Address</h3>
+                <p><?php echo $address?></p>
+                <h3>ABN</h3>
+                <p><?php echo $abn?></p>
+              </div>
+            </div>
+            
+            <hr>
+            <a href="organization-needs.php"><button class="btn btn-primary" type="button">Needs List</button></a>
         </div>
         <?php
             include('includes/footer.php');

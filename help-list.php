@@ -37,7 +37,7 @@
                               <div class=\"row\">
                                     <div class=\"col-md-6\">
                                         <div class=\"img-size-div\">
-                                          <img class=\"img-size\" src=\"images/organizations/$organization_image\">
+                                          <img class=\"img-size rounded\" src=\"images/organizations/profile_image/$organization_image\">
                                         </div>
                                     </div>
                                     <div class=\"col-md-6\">
