@@ -1,7 +1,15 @@
 /*nav*/
 .bgNavColor {
     background-color:#003366;
+    
 }
+
+.icon{
+    height:30px;
+    width:30px;
+    
+}
+
 
 .nav-link-color {
     color: white;

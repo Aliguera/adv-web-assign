@@ -1,4 +1,26 @@
 <?php
+  session_start();
+  //doest allow users to get to the page before logging in
+  if (!$_SESSION['organization_email']) {
+      header("location: login.php");
+  }
+
+  $id = $_GET['id'];
+  //include autoloader
+  include('autoloader.php');
+  //   //create instance of organization class
+  $orgns = new Organization();
+  $organizationDetails = $orgns -> getOrganizationDetails($id);
+  
+  $org_name = $organizationDetails[0];
+  $org_description = $organizationDetails[1];
+  $org_address = $organizationDetails[2];
+  $address = $organizationDetails[3];
+  $org_phone = $organizationDetails[4];
+  $need_title = $organizationDetails[5];
+  $need_description = $organizationDetails[6];
+  
+  echo $org_name;
 //   session_start();
 //   //doest allow users to get to the page before logging in
 //   if (!$_SESSION['user_email'] && !$_SESSION['organization_email']) {
@@ -88,15 +110,27 @@
             
             <h1 class="text-center">Hospital Alfred</h1>
             <div class="btn-group btn-group-toggle mr-5" data-toggle="buttons">
-              <button class="btn btn-outline-primary about-us-button active">
+              <button  type="button" class="btn btn-outline-primary about-us-button active">
                 <input type="radio" name="options" id="option1" autocomplete="off" checked> About Us
               </button>
-              <button class="btn btn-outline-primary needs-list-button">
+              <button  type="button" class="btn btn-outline-primary needs-list-button">
                 <input type="radio" name="options" id="option2" autocomplete="off"> Needs List
               </button>
             </div>
             <div class="about-us">
               <h3>About Us</h3>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
+              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+              dolor in hendrerit in vulputate velit esse molestie consequat,
+              vel illum dolore eu feugiat nulla facilisis at vero eros et
+              accumsan et iusto odio dignissim qui blandit praesent luptatum
+              zzril delenit augue duis dolore te feugait nulla facilisi.
+              Nam liber tempor cum soluta nobis eleifend option congue
+              nihil imperdiet doming id quod mazim placerat facer possim
+              assum.</p>
               <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
               sed diam nonummy nibh euismod tincidunt ut laoreet dolore
               magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
@@ -118,6 +152,42 @@
               <div class="needs-list">
                 <div class="panel">
                   <h1>testt</h1>
+                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
+              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+              dolor in hendrerit in vulputate velit esse molestie consequat,
+              vel illum dolore eu feugiat nulla facilisis at vero eros et
+              accumsan et iusto odio dignissim qui blandit praesent luptatum
+              zzril delenit augue duis dolore te feugait nulla facilisi.
+              Nam liber tempor cum soluta nobis eleifend option congue
+              nihil imperdiet doming id quod mazim placerat facer possim
+              assum.</p>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
+              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+              dolor in hendrerit in vulputate velit esse molestie consequat,
+              vel illum dolore eu feugiat nulla facilisis at vero eros et
+              accumsan et iusto odio dignissim qui blandit praesent luptatum
+              zzril delenit augue duis dolore te feugait nulla facilisi.
+              Nam liber tempor cum soluta nobis eleifend option congue
+              nihil imperdiet doming id quod mazim placerat facer possim
+              assum.</p>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
+              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+              dolor in hendrerit in vulputate velit esse molestie consequat,
+              vel illum dolore eu feugiat nulla facilisis at vero eros et
+              accumsan et iusto odio dignissim qui blandit praesent luptatum
+              zzril delenit augue duis dolore te feugait nulla facilisi.
+              Nam liber tempor cum soluta nobis eleifend option congue
+              nihil imperdiet doming id quod mazim placerat facer possim
+              assum.</p>
                 </div>
               </div>
         </div>

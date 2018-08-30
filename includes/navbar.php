@@ -22,11 +22,11 @@
             );
     }
 ?>
-
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top " >-->
 <nav class="navbar bgNavColor navbar-expand-lg fixed-top">
     <a href="index.php" class="navbar-brand nav-link-color">Help2Day</a>
-    <button class="navbar-toggler order-sm-5" type="button" data-toggle="collapse" data-target="#main-menu">
-        <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#main-menu" >
+        <img class="icon" src="/images/hamburger.png">
     </button>
     
     <div class="collapse navbar-collapse" id="main-menu">
