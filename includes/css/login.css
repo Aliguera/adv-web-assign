@@ -3,10 +3,18 @@
     background-color:#003366 !important;
 }
 
+
 .nav-link-color {
     color: white;
     font-family: arial;
 }
+
+
+.icon{
+    height:30px !important;
+    width:30px;
+}
+
 
 /*Login Page*/
 

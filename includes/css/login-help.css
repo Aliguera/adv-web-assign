@@ -8,6 +8,11 @@
     font-family: arial;
 }
 
+.icon{
+    height:30px;
+    width:30px;
+}
+
 /*login help*/
 .col-md-4 {
     margin-top: 50px;

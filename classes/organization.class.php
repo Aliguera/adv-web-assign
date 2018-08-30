@@ -138,7 +138,8 @@
 						need_created_at
                         FROM `organizations`
                         INNER JOIN needs
-                        ON (? = needs.company_id_fk)
+                        ON (organizations.id = needs.company_id_fk)
+                        WHERE organizations.id = ?
                         ORDER BY need_created_at DESC";
                         
             $statement = $this -> connection -> prepare($query);

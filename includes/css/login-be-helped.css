@@ -13,6 +13,11 @@
     font-family: arial;
 }
 
+.icon{
+    height:30px;
+    width:30px;
+}
+
 /*footer*/
 footer {
     background-color:#003366;

@@ -10,17 +10,18 @@
   include('autoloader.php');
   //   //create instance of organization class
   $orgns = new Organization();
-  $organizationDetails = $orgns -> getOrganizationDetails($id);
+  $organization_details = $orgns -> getOrganizationDetails($id);
   
-  $org_name = $organizationDetails[0];
-  $org_description = $organizationDetails[1];
-  $org_address = $organizationDetails[2];
-  $address = $organizationDetails[3];
-  $org_phone = $organizationDetails[4];
-  $need_title = $organizationDetails[5];
-  $need_description = $organizationDetails[6];
-  
-  echo $org_name;
+  foreach( $organization_details as $item ) {
+                    $organization_name = $item['name'];
+                    $organization_description = $item['description'];
+                    $organization_address = $item['address'];
+                    $organization_phone = $item['phone'];
+                    $need_title = $item['title'];
+                    $need_description = $item['need_description'];
+                    
+                    echo $need_title;
+  }
 //   session_start();
 //   //doest allow users to get to the page before logging in
 //   if (!$_SESSION['user_email'] && !$_SESSION['organization_email']) {
@@ -131,63 +132,22 @@
               Nam liber tempor cum soluta nobis eleifend option congue
               nihil imperdiet doming id quod mazim placerat facer possim
               assum.</p>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-              dolor in hendrerit in vulputate velit esse molestie consequat,
-              vel illum dolore eu feugiat nulla facilisis at vero eros et
-              accumsan et iusto odio dignissim qui blandit praesent luptatum
-              zzril delenit augue duis dolore te feugait nulla facilisi.
-              Nam liber tempor cum soluta nobis eleifend option congue
-              nihil imperdiet doming id quod mazim placerat facer possim
-              assum.</p>
               <h3>Address</h3>
               <p>45/123 Geroge Street, Sydney, Australia</p>
+              <h3>Phone</h3>
+              <p>53252435326</p>
               <button type="button" class="btn btn-success">Send Message</button>
               <button type="button" class="btn btn-primary">Interested</button>
               </div>
               
               <div class="needs-list">
-                <div class="panel">
-                  <h1>testt</h1>
-                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-              dolor in hendrerit in vulputate velit esse molestie consequat,
-              vel illum dolore eu feugiat nulla facilisis at vero eros et
-              accumsan et iusto odio dignissim qui blandit praesent luptatum
-              zzril delenit augue duis dolore te feugait nulla facilisi.
-              Nam liber tempor cum soluta nobis eleifend option congue
-              nihil imperdiet doming id quod mazim placerat facer possim
-              assum.</p>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-              dolor in hendrerit in vulputate velit esse molestie consequat,
-              vel illum dolore eu feugiat nulla facilisis at vero eros et
-              accumsan et iusto odio dignissim qui blandit praesent luptatum
-              zzril delenit augue duis dolore te feugait nulla facilisi.
-              Nam liber tempor cum soluta nobis eleifend option congue
-              nihil imperdiet doming id quod mazim placerat facer possim
-              assum.</p>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-              dolor in hendrerit in vulputate velit esse molestie consequat,
-              vel illum dolore eu feugiat nulla facilisis at vero eros et
-              accumsan et iusto odio dignissim qui blandit praesent luptatum
-              zzril delenit augue duis dolore te feugait nulla facilisi.
-              Nam liber tempor cum soluta nobis eleifend option congue
-              nihil imperdiet doming id quod mazim placerat facer possim
-              assum.</p>
+                <h3>Needs List</h3>
+                <div class="card">
+                  <div class="card-header">
+                    Needs Title
+                  </div>
+                  <p>Lorem ipsum d</p>
+                  <button class="btn btn-primary need-help-button">I can help</button>
                 </div>
               </div>
         </div>
