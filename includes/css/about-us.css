@@ -8,9 +8,75 @@
     font-family: arial;
 }
 
+/*body*/
+body {
+    background-color: #D3D3D3;
+}
+
+
+
 /*footer*/
 footer {
     background-color:#003366;
     color: white;
-    
 }
+
+.about-us-panel{
+    background-color:#FFFFFF;
+    width: 50%;
+    margin:auto;
+    padding:10px;
+    margin-bottom:10px;
+}
+
+
+.set-text-middle{
+    text-align:center;
+}
+
+.img{
+    max-width:300px;
+    max-height:200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:10px;
+    border-radius: 50%;
+    width: 100%;
+}
+
+.about-us-img {
+    width: 100%;
+}
+
+
+
+/*social media*/
+.fa {
+    
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    display: block;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+ 
+}
+
+
+

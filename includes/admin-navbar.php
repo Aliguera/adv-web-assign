@@ -13,7 +13,7 @@
 ?>
 
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg fixed-top">
-    <a href="admin-home.php" class="navbar-brand order-sm-8">Admin - Help2Day</a>
+    <a href="admin-home.php" class="navbar-brand">Admin - Help2Day</a>
     <button class="navbar-toggler order-sm-5" type="button" data-toggle="collapse" data-target="#main-menu">
         <span class="navbar-toggler-icon"></span>
     </button>

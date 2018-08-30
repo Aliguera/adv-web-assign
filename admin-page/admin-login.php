@@ -45,8 +45,8 @@ $css_page = "<link rel='stylesheet' href='../includes/css/admin-login.css'>";
                         }
                     ?>
                     <form id="admin-login-form" method="post" action="admin-login.php">
-                      <h2>Welcome to the Help2Day Admin Page</h2>
-                       <h4>Log in to manage Help2Day Website</h4>
+                      <h2 class="text-center">Welcome to the Help2Day Admin Page</h2>
+                       <h4 class="text-center">Log in to manage Help2Day Website</h4>
                        <div class="form-group">
                            <label for="email">Email Address</label>
                            <input class="form-control" type="email" name="email" id="email" placeholder="you@example.com">

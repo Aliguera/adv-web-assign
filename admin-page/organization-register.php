@@ -8,7 +8,7 @@
     include('../autoloader.php');
     
     //check request method
-    //if request is a POST request
+    // if request is a POST request
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         //handle sign up here
         $organization = new Organization();
@@ -19,8 +19,31 @@
         $description = $_POST['description'];
         $abn = $_POST['abn'];
         $address = $_POST['address'];
+        $org_image = $_FILES['org_image'];
+        
+        $target_dir = "../images/organizations/profile_image/";
+        $target_file = $target_dir . basename($_FILES["org_image"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        // Check if image file is a actual image or fake image
+        if(isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["org_image"]["tmp_name"]);
+            if($check !== false) {
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
+        }
+        
+        if (move_uploaded_file($_FILES["org_image"]["tmp_name"], $target_file)) {
+            
+        } else {
+            
+        }
+        
         //sign user up
-        $organization_register = $organization -> create($email, $password, $name, $description, $abn, $address);
+        $organization_register = $organization -> create($email, $password, $name, $description, $abn, $address, $org_image);
         if($organization_register == true) {
             //signup succeeded
             //organization register succeeded
@@ -58,7 +81,7 @@ $css_page = "<link rel='stylesheet' href='../includes/css/organization-register.
                         }
                     
                     ?>
-                    <form id="organization-register-form" method="post" action="organization-register.php">
+                    <form id="organization-register-form" method="post" enctype="multipart/form-data" action="organization-register.php">
                        <h3>Please fill the following fields to register an organization</h3>
                        <div class="form-group">
                            <label for="email">Email Address</label>
@@ -83,6 +106,10 @@ $css_page = "<link rel='stylesheet' href='../includes/css/organization-register.
                        <div class="form-group">
                            <label>Address</label>
                            <input class="form-control" name="address" id="address" placeholder="28/192 George Street, Sydney">
+                       </div>
+                       <div class="form-group">
+                           <label>Organization Profile Picture</label>
+                           <input type="file" name="org_image" id="org_image">
                        </div>
                        <button class="btn btn-danger" type="submit">Clear</button>
                        <button class="btn btn-primary" type="submit">Submit</button>
