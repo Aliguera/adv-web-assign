@@ -23,6 +23,7 @@
             <p class="set-text-middle">Let's make a difference in others life from today.</p>
         </div>
         <div>
+            <!--aaa-->
             <h1 class="set-text-middle">About</h1>
             <p>At Help2day, we all come to work every day because we want to solve the biggest problem in our community.</p>
             <img class="about-us-img" src="/images/can_help.jpg">
