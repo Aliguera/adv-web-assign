@@ -25,7 +25,7 @@
         <div>
             <h1 class="set-text-middle">About</h1>
             <p>At Help2day, we all come to work every day because we want to solve the biggest problem in our community.</p>
-            <img src="/images/can_help.jpg" width='700'>
+            <img class="about-us-img" src="/images/can_help.jpg">
         </div>
 
     </div>
@@ -35,7 +35,7 @@
         <br>
         <div class="row">
             <div class="col-md-6">
-                <img class="img rounded" src="images/home/about-us-alick.jpg">
+                <img class="img rounded about-us-img" src="images/home/about-us-alick.jpg">
                 <h3 class="set-text-middle">Alick</h3>
                 <p class="set-text-middle">Bachelor of Information Technology</p>
                 <br>
@@ -48,7 +48,7 @@
 
             </div>
             <div class="col-md-6">
-                <img class="img rounded" src="images/home/about-us-victor.jpg">
+                <img class="img rounded about-us-img" src="images/home/about-us-victor.jpg">
                 <h3 class="set-text-middle">Victor</h3>
                 <p class="set-text-middle">Bachelor of Information Technology</p>
                 <br>

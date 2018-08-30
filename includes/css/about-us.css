@@ -42,7 +42,11 @@ footer {
     margin-right: auto;
     margin-bottom:10px;
     border-radius: 50%;
-   
+    width: 100%;
+}
+
+.about-us-img {
+    width: 100%;
 }
 
 

@@ -88,33 +88,42 @@
             
             <h1 class="text-center">Hospital Alfred</h1>
             <div class="btn-group btn-group-toggle mr-5" data-toggle="buttons">
-              <label class="btn btn-primary active">
+              <button class="btn btn-outline-primary about-us-button active">
                 <input type="radio" name="options" id="option1" autocomplete="off" checked> About Us
-              </label>
-              <label class="btn btn-outline-primary">
+              </button>
+              <button class="btn btn-outline-primary needs-list-button">
                 <input type="radio" name="options" id="option2" autocomplete="off"> Needs List
-              </label>
+              </button>
             </div>
-            <h3>About Us</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-            sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-            magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-            quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-            ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-            dolor in hendrerit in vulputate velit esse molestie consequat,
-            vel illum dolore eu feugiat nulla facilisis at vero eros et
-            accumsan et iusto odio dignissim qui blandit praesent luptatum
-            zzril delenit augue duis dolore te feugait nulla facilisi.
-            Nam liber tempor cum soluta nobis eleifend option congue
-            nihil imperdiet doming id quod mazim placerat facer possim
-            assum.</p>
-            <h3>Address</h3>
-            <p>45/123 Geroge Street, Sydney, Australia</p>
-            <button type="button" class="btn btn-success">Send Message</button>
-            <button type="button" class="btn btn-primary">Interested</button>
+            <div class="about-us">
+              <h3>About Us</h3>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
+              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+              dolor in hendrerit in vulputate velit esse molestie consequat,
+              vel illum dolore eu feugiat nulla facilisis at vero eros et
+              accumsan et iusto odio dignissim qui blandit praesent luptatum
+              zzril delenit augue duis dolore te feugait nulla facilisi.
+              Nam liber tempor cum soluta nobis eleifend option congue
+              nihil imperdiet doming id quod mazim placerat facer possim
+              assum.</p>
+              <h3>Address</h3>
+              <p>45/123 Geroge Street, Sydney, Australia</p>
+              <button type="button" class="btn btn-success">Send Message</button>
+              <button type="button" class="btn btn-primary">Interested</button>
+              </div>
+              
+              <div class="needs-list">
+                <div class="panel">
+                  <h1>testt</h1>
+                </div>
+              </div>
         </div>
         <?php
             include('includes/footer.php');
         ?>
     </body>
+    <script src="includes/js/organization-details.js"></script>
 </html>
