@@ -12,7 +12,6 @@ $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
         <?php
             include('includes/navbar.php');
         ?>
-        <div class="jumbotron homePageJumbo">
           <div class="jumboBox">
               <h2 class="display-4">Help to be helped!</h2>
               <p class="lead">There are many people suffering asking for your help, help today to be helped tomorrow!</p>
@@ -25,28 +24,28 @@ $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
             <div class="row">
                 <div class="col-lg-4 mb-2">
                     <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="images/jumb.png" alt="Card image cap">
+                      <img class="card-img-top step-img" src="images/step1.png" alt="Card image cap">
                       <div class="card-body">
-                        <h5 class="card-title">Step 1</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">Sign Up</h5>
+                        <p class="card-text">Join us to make a difference in others life today!</p>
                       </div>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-2">
                     <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="images/jumb.png" alt="Card image cap">
+                      <img class="card-img-top step-img" src="images/step2.png" alt="Card image cap">
                       <div class="card-body">
-                        <h5 class="card-title">Step 2</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">View Help List</h5>
+                        <p class="card-text">Look for opportunity that you are willing to help and INTERESTED it.</p>
                       </div>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-2">
                     <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="images/jumb.png" alt="Card image cap">
+                      <img class="card-img-top step-img" src="images/step3.png" alt="Card image cap">
                       <div class="card-body">
-                        <h5 class="card-title">Step 3</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">Reply From Insitution</h5>
+                        <p class="card-text">If you have been selected by our institution, a representitive will contact you by email or phone</p>
                       </div>
                     </div>
                 </div>

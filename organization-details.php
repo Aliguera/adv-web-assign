@@ -4,7 +4,6 @@
   if (!$_SESSION['organization_email']) {
       header("location: login.php");
   }
-
   $id = $_GET['id'];
   //include autoloader
   include('autoloader.php');
@@ -12,27 +11,20 @@
   $orgns = new Organization();
   $organization_details = $orgns -> getOrganizationDetails($id);
   
-  foreach( $organization_details as $item ) {
-                    $organization_name = $item['name'];
-                    $organization_description = $item['description'];
-                    $organization_address = $item['address'];
-                    $organization_phone = $item['phone'];
-                    $need_title = $item['title'];
-                    $need_description = $item['need_description'];
-                    
-                    echo $need_title;
-  }
-//   session_start();
-//   //doest allow users to get to the page before logging in
-//   if (!$_SESSION['user_email'] && !$_SESSION['organization_email']) {
-//       header("location: index.php");
-//   }
+  $organization_needs = $orgns -> getOrganizationNeeds($id);
   
-//   //include autoloader
-//   include('autoloader.php');
-//   //create instance of products class
-//   $orgns = new Organization();
-//   $organizations = $orgns -> getOrganizations();
+  // 
+  //             foreach( $organization_details as $item ) {
+  //                     $organization_name = $item['name'];
+  //                     $organization_description = $item['description'];
+  //                     $organization_address = $item['address'];
+  //                     $organization_phone = $item['phone'];
+  //                     $need_title = $item['title'];
+  //                     $need_description = $item['need_description'];
+                      
+  //                     echo ""
+  //                   }
+  //           
   
   $page_title = "Organization Details Page";
   $css_page = "<link rel='stylesheet' href='includes/css/organization-details.css'>";
@@ -45,34 +37,6 @@
     <body style="padding-top: 64px;">
         <?php include('includes/navbar.php') ?>
         <div class="container">
-             <?php
-            //     foreach( $organizations as $item ) {
-            //         $organization_id = $item['id'];
-            //         $organization_name = $item['name'];
-            //         $organization_description = $item['description'];
-            //         $organization_image = $item['profile_image'];
-                    
-            //         echo "<div class=\"card mt-5\">
-            //                 <div class=\"card-header\">
-            //                   $organization_name
-            //                 </div>
-            //                 <div class=\"card-body\">
-            //                   <div class=\"row\">
-            //                         <div class=\"col-md-6\">
-            //                             <div class=\"im-size-div\">
-            //                               <img class\"img-size\" src=\"images/organizations/$organization_image\">
-            //                             </div>
-            //                         </div>
-            //                         <div class=\"col-md-6\">
-            //                             <h3>$organization_name</h3>
-            //                             <p>$organization_description</p>
-            //                             <a href=\"detail.php?organization_id=$organization_id\"><button class=\"btn btn-primary right\">View</button></a>
-            //                         </div>
-            //                     </div>
-            //                 </div>
-            //               </div>";
-            //     }
-             ?>
             <div id="organizationCarousel" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
                 <li data-target="#organizationCarousel" data-slide-to="0" class="active"></li>
@@ -109,7 +73,7 @@
               </a>
             </div>
             
-            <h1 class="text-center">Hospital Alfred</h1>
+            <h1 class="text-center"><?php echo $organization_details[0]['name'] ?></h1>
             <div class="btn-group btn-group-toggle mr-5" data-toggle="buttons">
               <button  type="button" class="btn btn-outline-primary about-us-button active">
                 <input type="radio" name="options" id="option1" autocomplete="off" checked> About Us
@@ -120,35 +84,43 @@
             </div>
             <div class="about-us">
               <h3>About Us</h3>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-              dolor in hendrerit in vulputate velit esse molestie consequat,
-              vel illum dolore eu feugiat nulla facilisis at vero eros et
-              accumsan et iusto odio dignissim qui blandit praesent luptatum
-              zzril delenit augue duis dolore te feugait nulla facilisi.
-              Nam liber tempor cum soluta nobis eleifend option congue
-              nihil imperdiet doming id quod mazim placerat facer possim
-              assum.</p>
+              <p><?php echo $organization_details[0]['description'] ?></p>
               <h3>Address</h3>
-              <p>45/123 Geroge Street, Sydney, Australia</p>
+              <p><?php echo $organization_details[0]['address'] ?></p>
               <h3>Phone</h3>
-              <p>53252435326</p>
+              <p><?php echo $organization_details[0]['phone'] ?></p>
               <button type="button" class="btn btn-success">Send Message</button>
               <button type="button" class="btn btn-primary">Interested</button>
               </div>
               
               <div class="needs-list">
                 <h3>Needs List</h3>
-                <div class="card">
-                  <div class="card-header">
-                    Needs Title
-                  </div>
-                  <p>Lorem ipsum d</p>
-                  <button class="btn btn-primary need-help-button">I can help</button>
-                </div>
+                <?php
+                  if (sizeof($organization_needs) > 0) {
+                    if (sizeof($organization_needs) > 1) {
+                      echo "<h4>This company has ", sizeof($organization_needs);echo" needs</h4>";
+                    } else {
+                      echo "<h4>This company has ", sizeof($organization_needs);echo" need</h4>";
+                    }
+                    
+                    foreach( $organization_needs as $item ) {
+                          $need_title = $item['title'];
+                          $need_description = $item['description'];
+                          
+                          echo "<div class=\"card\">
+                                  <div class=\"card-header\">
+                                    $need_title <button class=\"btn btn-info float-right", if (!$_SESSION['organization_email']){echo"style=\"display:hidden\"}","\">I can help</button>
+                                  </div>
+                                  <p class=\"need-description\">$need_description</p>
+                                </div>";
+                        }
+                  } else {
+                    echo "<p>This organization doesn't have needs yet</p>";
+                  }
+                  
+                 ?>
+                
+                
               </div>
         </div>
         <?php

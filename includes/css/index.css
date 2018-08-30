@@ -74,6 +74,13 @@ body {
     margin-left: 40%;
 }
 
+.step-img{
+    max-height:200px;
+    width:100%;
+    padding:10px;
+    
+}
+
 footer {
     background-color:#003366;
     color: white;

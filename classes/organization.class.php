@@ -3,6 +3,7 @@
         public $organizations = array();
         public $organization_profile = array();
         public $organization_details = array();
+        public $organization_needs = array();
         public $errors = array();
         public function __construct(){
             parent::__construct();
@@ -132,15 +133,9 @@
                         name,
                         description,
                         address,
-                        phone,
-						title,
-						need_description,
-						need_created_at
+                        phone
                         FROM `organizations`
-                        INNER JOIN needs
-                        ON (organizations.id = needs.company_id_fk)
-                        WHERE organizations.id = ?
-                        ORDER BY need_created_at DESC";
+                        WHERE organizations.id = ?";
                         
             $statement = $this -> connection -> prepare($query);
             $statement -> bind_param('s', $id);
@@ -151,21 +146,29 @@
             }
             
             return $this -> organization_details;
+        }
+        
+        public function getOrganizationNeeds($id) {
+            $query = "  SELECT
+                        needs.id,
+                        needs.title,
+						needs.description,
+						needs.created_at
+                        FROM `organizations`
+                        INNER JOIN needs
+                        ON (organizations.id = needs.company_id_fk)
+                        WHERE organizations.id = ?
+                        ORDER BY created_at DESC";
+                        
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $id);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            while( $row = $result -> fetch_assoc() ) {
+                array_push( $this -> organization_needs, $row );
+            }
             
-            // if( $result -> num_rows == 0) {
-            //     //account does not exist
-            //     return false;
-            // } else {
-            //     $organization = $result -> fetch_assoc();
-            //     $org_name = $organization['name'];
-            //     $org_description = $organization['description'];
-            //     $org_address = $organization['address'];
-            //     $org_phone = $organization['phone'];
-            //     $need_title = $organization['title'];
-            //     $need_description = $organization['description'];
-            //     array_push( $this -> organization_profile, $org_name, $org_description, $org_address, $org_phone, $need_title, $need_description);
-            //     return $this -> organization_profile;
-            // }
+            return $this -> organization_needs;
         }
         
     }

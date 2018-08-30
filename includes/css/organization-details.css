@@ -18,6 +18,14 @@ body {
     font-family: arial, sans-serif;
 }
 
+.card {
+    margin-top: 20px;
+}
+
+.need-description {
+    padding: 15px;
+}
+
 /*organization details*/
 
 .carousel-control-next, .carousel-control-prev {
