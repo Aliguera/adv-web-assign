@@ -109,7 +109,7 @@
                           
                           echo "<div class=\"card\">
                                   <div class=\"card-header\">
-                                    $need_title <button class=\"btn btn-info float-right", if (!$_SESSION['organization_email']){echo"style=\"display:hidden\"}","\">I can help</button>
+                                    $need_title <button class=\"btn btn-info float-right\">I can help</button>
                                   </div>
                                   <p class=\"need-description\">$need_description</p>
                                 </div>";
