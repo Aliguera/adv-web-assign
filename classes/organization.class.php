@@ -4,6 +4,7 @@
         public $organization_profile = array();
         public $organization_details = array();
         public $organization_needs = array();
+        public $organization_carousel = array();
         public $errors = array();
         public function __construct(){
             parent::__construct();
@@ -169,6 +170,40 @@
             }
             
             return $this -> organization_needs;
+        }
+        
+        public function getCarouselImages($organization_id) {
+            $query = "SELECT
+                      title,
+                      description,
+                      carousel_image,
+                      active
+                      FROM
+                      organization_carousel_images
+                      WHERE
+                      organization_id_fk = ?";
+            
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $organization_id);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            while( $row = $result -> fetch_assoc() ) {
+                array_push( $this -> organization_carousel, $row );
+            }
+            
+            return $this -> organization_carousel;
+        }
+        
+        public function addCarouselImage($title, $description, $carousel_image, $active, $organization_id) {
+            $query = "INSERT INTO organization_carousel_images
+                    (title, description, carousel_image, active, organization_id_fk, created_at)
+                    VALUES
+                    (?, ?, ?, ?, ?,NOW())";
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+                $statement = $this -> connection -> prepare($query);
+                $statement -> bind_param('sssbs', $title, $description, $carousel_image, $active, $organization_id);
+                $success = $statement -> execute() ? true : false;
+                return $success;
         }
         
     }

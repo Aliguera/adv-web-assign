@@ -38,7 +38,7 @@
         }
         
         public function authenticate($email, $password) {
-            $query = 'SELECT email, password, fullname, user_level
+            $query = 'SELECT id, email, password, fullname, user_level
                       FROM users 
                       WHERE email = ? AND user_level = 1';
                       $statement = $this -> connection -> prepare($query);
@@ -50,6 +50,7 @@
                           return false;
                       } else {
                           $account = $result -> fetch_assoc();
+                          $id = $account['id'];
                           $email = $account['email'];
                           $hash = $account['password'];
                           $fullname = $account['fullname'];
@@ -63,6 +64,61 @@
                               return false;
                           }
                       }
+        }
+        
+        public function setUserInterest($organization_id) {
+            $query = "SELECT id
+                      FROM users
+                      WHERE email = ?";
+            
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $_SESSION['user_email']);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            $account = $result -> fetch_assoc();
+            $user_id = $account['id'];
+            
+            $user_id_int = (int)$user_id;
+            $org_id_int = (int)$organization_id;
+            
+            $query2 = "INSERT INTO organizations_interests(user_id_fk, organization_id_fk)
+                       VALUES (?, ?)";
+            $statement2 = $this -> connection -> prepare($query2);
+            $statement2 -> bind_param('ii', $user_id_int, $org_id_int);
+            $success2 = $statement2 -> execute() ? true : false;
+            if ($success2 == false) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        
+        public function checkUserInterest($organization_id) {
+            $query = "SELECT id
+                      FROM users
+                      WHERE email = ?";
+            
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $_SESSION['user_email']);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            $account = $result -> fetch_assoc();
+            $user_id = $account['id'];
+            
+            $user_id_int = (int)$user_id;
+            $org_id_int = (int)$organization_id;
+            
+            $query2 = "SELECT * FROM organizations_interests
+                       WHERE user_id_fk = ? AND organization_id_fk = ?";
+            $statement2 = $this -> connection -> prepare($query2);
+            $statement2 -> bind_param('ii', $user_id_int, $org_id_int);
+            $statement2 -> execute();
+            $result = $statement2 -> get_result();
+            if( $result -> num_rows == 0) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 ?>
