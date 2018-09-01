@@ -3,6 +3,11 @@
     background-color:#003366 !important;
 }
 
+.icon{
+    height:30px;
+    width:30px;
+}
+
 .nav-link-color {
     color: white;
     font-family: arial;

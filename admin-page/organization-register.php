@@ -19,6 +19,7 @@
         $description = $_POST['description'];
         $abn = $_POST['abn'];
         $address = $_POST['address'];
+        $phone = $_POST['phone'];
         $org_image = $_FILES['org_image'];
         
         $target_dir = "../images/organizations/profile_image/";
@@ -43,7 +44,7 @@
         }
         
         //sign user up
-        $organization_register = $organization -> create($email, $password, $name, $description, $abn, $address, $org_image);
+        $organization_register = $organization -> create($email, $password, $name, $description, $abn, $address, $org_image, $phone);
         if($organization_register == true) {
             //signup succeeded
             //organization register succeeded
@@ -106,6 +107,10 @@ $css_page = "<link rel='stylesheet' href='../includes/css/organization-register.
                        <div class="form-group">
                            <label>Address</label>
                            <input class="form-control" name="address" id="address" placeholder="28/192 George Street, Sydney">
+                       </div>
+                       <div class="form-group">
+                           <label>Phone</label>
+                           <input class="form-control" name="phone" id="phone" placeholder="+61 477777777">
                        </div>
                        <div class="form-group">
                            <label>Organization Profile Picture</label>

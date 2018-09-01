@@ -43,7 +43,8 @@
                                     <div class=\"col-md-6\">
                                         <h3>$organization_name</h3>
                                         <p>$organization_description</p>
-                                        <a href=\"organization-details.php\"><button class=\"btn btn-primary right\">View</button></a>
+                                        <a href=\"organization-details.php?id=$organization_id\"><button class=\"btn btn-primary right\">View</button></a>
+                                    
                                     </div>
                                 </div>
                             </div>

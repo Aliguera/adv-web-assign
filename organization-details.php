@@ -1,15 +1,43 @@
 <?php
-//   session_start();
-//   //doest allow users to get to the page before logging in
-//   if (!$_SESSION['user_email'] && !$_SESSION['organization_email']) {
-//       header("location: index.php");
-//   }
+  session_start();
   
-//   //include autoloader
-//   include('autoloader.php');
-//   //create instance of products class
-//   $orgns = new Organization();
-//   $organizations = $orgns -> getOrganizations();
+  $id = $_GET['id'];
+  //include autoloader
+  include('autoloader.php');
+  //   //create instance of organization class
+  $orgns = new Organization();
+  $organization_details = $orgns -> getOrganizationDetails($id);
+  
+  $organization_needs = $orgns -> getOrganizationNeeds($id);
+  
+  $organization_carousel = $orgns -> getCarouselImages($id);
+  $org_carousel_length = count($organization_carousel);
+  
+  $user = new Account();
+  $user_interest_check = $user -> checkUserInterest($id);
+  
+  function executeUserInterest($organization_id) {
+    $user_interest_obj = new Account();
+    $user_interest = $user_interest_obj -> setUserInterest($organization_id);
+  }
+  
+  //need id took from the url when ajax takes the I can help button id
+  $organization_id_url = $_GET['organization_id'];
+  if(isset($organization_id_url)) {
+    executeUserInterest($organization_id_url);
+  }
+  
+  //need id took from the url when ajax takes the I can help button id
+  $need_id_url = $_GET['need_id'];
+  
+  if (isset($need_id_url)) {
+    executeUserNeed($need_id_url);
+  }
+  
+  function executeUserNeed($need_id) {
+    $user_need_obj = new Account();
+    $user_need = $user_need_obj -> setUserNeed($need_id);
+  }
   
   $page_title = "Organization Details Page";
   $css_page = "<link rel='stylesheet' href='includes/css/organization-details.css'>";
@@ -22,103 +50,98 @@
     <body style="padding-top: 64px;">
         <?php include('includes/navbar.php') ?>
         <div class="container">
-             <?php
-            //     foreach( $organizations as $item ) {
-            //         $organization_id = $item['id'];
-            //         $organization_name = $item['name'];
-            //         $organization_description = $item['description'];
-            //         $organization_image = $item['profile_image'];
-                    
-            //         echo "<div class=\"card mt-5\">
-            //                 <div class=\"card-header\">
-            //                   $organization_name
-            //                 </div>
-            //                 <div class=\"card-body\">
-            //                   <div class=\"row\">
-            //                         <div class=\"col-md-6\">
-            //                             <div class=\"im-size-div\">
-            //                               <img class\"img-size\" src=\"images/organizations/$organization_image\">
-            //                             </div>
-            //                         </div>
-            //                         <div class=\"col-md-6\">
-            //                             <h3>$organization_name</h3>
-            //                             <p>$organization_description</p>
-            //                             <a href=\"detail.php?organization_id=$organization_id\"><button class=\"btn btn-primary right\">View</button></a>
-            //                         </div>
-            //                     </div>
-            //                 </div>
-            //               </div>";
-            //     }
-             ?>
-            <div id="organizationCarousel" class="carousel slide" data-ride="carousel">
+            <div id="organizationCarousel" class="carousel slide <?php if ($org_carousel_length == 0) { echo "d-none"; }?>" data-ride="carousel">
               <ol class="carousel-indicators">
-                <li data-target="#organizationCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#organizationCarousel" data-slide-to="1"></li>
-                <li data-target="#organizationCarousel" data-slide-to="2"></li>
+                <?php 
+                  foreach( $organization_carousel as $item ) {
+                    $active = $item['active'];
+                    echo "<li data-target=\"#organizationCarousel\" data-slide-to=\""; echo key($item); echo"\" class=\""; if($active == 1) { echo "active"; } echo"\"></li>";
+                  }?>
               </ol>
               <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img class="d-block w-100" src="images/organizations/carousel/organization1/orga1_pic1.jpg" alt="First Organization Pic">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h5>Organization Pic 1</h5>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="images/organizations/carousel/organization1/orga1_pic2.jpg" alt="Second Organization Pic">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h5>Organization Pic 2</h5>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="images/organizations/carousel/organization1/orga1_pic3.jpg" alt="Third Organization Pic">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h5>Organization Pic 3</h5>
-                  </div>
-                </div>
+                <?php foreach( $organization_carousel as $item ) {
+                  $title = $item['title'];
+                  $description = $item['description'];
+                  $carousel_image = $item['carousel_image'];
+                  echo "<div class\"carousel-item"; if($active == 1) { echo "active"; } echo"\">
+                          <img class=\"d-block w-100\" src=\"images/organizations/carousel/$carousel_image\" alt=\"$title\">
+                          <div class=\"carousel-caption d-none d-md-block\">
+                            <h3>$title</h3>
+                            <p>$description</p>
+                          </div>
+                        </div>";
+                }?>
               </div>
-              <a class="carousel-control-prev" href="#organizationCarousel" role="button" data-slide="prev">
+              <a class="carousel-control-prev <?php if ($org_carousel_length == 1) { echo "d-none"; }?>" href="#organizationCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
               </a>
-              <a class="carousel-control-next" href="#organizationCarousel" role="button" data-slide="next">
+              <a class="carousel-control-next <?php if ($org_carousel_length == 1) { echo "d-none"; }?>" href="#organizationCarousel" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
               </a>
             </div>
             
-            <h1 class="text-center">Hospital Alfred</h1>
+            <h1 class="text-center"><?php echo $organization_details[0]['name'] ?></h1>
             <div class="btn-group btn-group-toggle mr-5" data-toggle="buttons">
-              <button class="btn btn-outline-primary about-us-button active">
+              <button  type="button" class="btn btn-outline-primary about-us-button active">
                 <input type="radio" name="options" id="option1" autocomplete="off" checked> About Us
               </button>
-              <button class="btn btn-outline-primary needs-list-button">
+              <button  type="button" class="btn btn-outline-primary needs-list-button">
                 <input type="radio" name="options" id="option2" autocomplete="off"> Needs List
               </button>
             </div>
             <div class="about-us">
               <h3>About Us</h3>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-              sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-              quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-              ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-              dolor in hendrerit in vulputate velit esse molestie consequat,
-              vel illum dolore eu feugiat nulla facilisis at vero eros et
-              accumsan et iusto odio dignissim qui blandit praesent luptatum
-              zzril delenit augue duis dolore te feugait nulla facilisi.
-              Nam liber tempor cum soluta nobis eleifend option congue
-              nihil imperdiet doming id quod mazim placerat facer possim
-              assum.</p>
+              <p><?php echo $organization_details[0]['description'] ?></p>
               <h3>Address</h3>
-              <p>45/123 Geroge Street, Sydney, Australia</p>
-              <button type="button" class="btn btn-success">Send Message</button>
-              <button type="button" class="btn btn-primary">Interested</button>
+              <p><?php echo $organization_details[0]['address'] ?></p>
+              <h3>Phone</h3>
+              <p><?php echo $organization_details[0]['phone'] ?></p>
+              <div class="alert alert-success d-none" role="alert"><h4 class="alert-heading">You are interested in help <?php echo $organization_details[0]['name']?></h4><p>Please, wait patient till the organization reply your interest in help.<br>Thanks.</p></div>
+              <?php
+                if (!$_SESSION['organization_email']) {
+                                echo"
+                                       <button id=\"$id\" class=\"btn btn-primary interested-button\""; if ($user_interest_check == 1) {echo "disabled";} echo">Interested</button>
+                                     ";            
+                }
+              ?>
               </div>
               
-              <div class="needs-list">
-                <div class="panel">
-                  <h1>testt</h1>
-                </div>
+              <div class="needs-list d-none">
+                <h3>Needs List</h3>
+                <?php
+                  if ($_SESSION['organization_email']) {
+                      
+                  }
+                  //check if the company has needs then display content
+                  if (sizeof($organization_needs) > 0) {
+                    if (sizeof($organization_needs) > 1) {
+                      echo "<h4>"; echo $organization_details[0]['name']; echo" has ", sizeof($organization_needs);echo" needs</h4>";
+                    } else {
+                      echo "<h4>"; echo $organization_details[0]['name']; echo" has ", sizeof($organization_needs);echo" need</h4>";
+                    }
+                    
+                    foreach( $organization_needs as $item ) {
+                          $need_id = $item['id'];
+                          $need_title = $item['title'];
+                          $need_description = $item['description'];
+                          
+                          echo "<div class=\"card\">
+                                  <div class=\"card-header\">
+                                    $need_title ";
+                          if (!$_SESSION['organization_email']) {
+                              echo"
+                                    <button id=\"$need_id\" class=\"btn btn-info float-right need-button\">I can help</button>
+                                   ";
+                          }
+                          echo "</div>
+                          <p class=\"need-description\">$need_description</p>
+                        </div>";
+                        }
+                  }
+                  
+                 ?>
               </div>
         </div>
         <?php
@@ -127,3 +150,4 @@
     </body>
     <script src="includes/js/organization-details.js"></script>
 </html>
+

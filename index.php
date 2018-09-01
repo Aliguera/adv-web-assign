@@ -1,6 +1,6 @@
 <?php
 session_start();
-$page_title = "Help People";
+$page_title = "Help2Day";
 $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
 ?>
 <!doctype html>
@@ -17,7 +17,7 @@ $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
               <h2 class="display-4">Help to be helped!</h2>
               <p class="lead">There are many people suffering asking for your help, help today to be helped tomorrow!</p>
               <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                <a class="btn btn-primary btn-lg" href="#learn" role="button">Learn more</a>
               </p>
           </div>
         </div>
@@ -25,28 +25,35 @@ $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
             <div class="row">
                 <div class="col-lg-4 mb-2">
                     <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="images/jumb.png" alt="Card image cap">
+                      <div class="img-size-div">
+                        <img class="card-img-top img-size step-img" src="images/step1.png" alt="Card image cap">
+                      </div>
+                      
                       <div class="card-body">
-                        <h5 class="card-title">Step 1</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">Sign Up</h5>
+                        <p class="card-text">Join us to make a difference in others life today!</p>
                       </div>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-2">
                     <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="images/jumb.png" alt="Card image cap">
+                      <div class="img-size-div">
+                        <img class="card-img-top img-size step-img" src="images/step2.png" alt="Card image cap">
+                      </div>
                       <div class="card-body">
-                        <h5 class="card-title">Step 2</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">View Help List</h5>
+                        <p class="card-text">Look for opportunity that you are willing to help and INTERESTED it.</p>
                       </div>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-2">
                     <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="images/jumb.png" alt="Card image cap">
+                      <div class="img-size-div">
+                        <img class="card-img-top img-size step-img" src="images/step3.png" alt="Card image cap">
+                      </div>
                       <div class="card-body">
-                        <h5 class="card-title">Step 3</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">Reply From Insitution</h5>
+                        <p class="card-text">If you have been selected by our institution, a representitive will contact you by email or phone</p>
                       </div>
                     </div>
                 </div>
@@ -66,7 +73,7 @@ $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui totam voluptates officiis nisi odio, incidunt tempora. Iure repellat nesciunt molestias eos magnam itaque, eveniet, sed magni ipsam eum perspiciatis repellendus.</p>
           </div>
         </div>
-        <div class="container">
+        <div class="container" id="learn">
           <h1 class="text-center needs-help-header">Who needs your help?</h1>
           <div class="needs-help-box">
             <h3 class="text-center">Sick People</h3>
@@ -88,4 +95,5 @@ $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
             include('includes/footer.php');
         ?>
     </body>
+    <script src="includes/js/index.js"></script>
 </html>

@@ -8,6 +8,11 @@
     font-family: arial;
 }
 
+.icon{
+    height:30px;
+    width:30px;
+}
+
 /*body*/
 body {
     background-color: #D3D3D3;
@@ -36,7 +41,7 @@ footer {
 
 .img{
     max-width:300px;
-    max-height:200px;
+    max-height:300;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -53,13 +58,14 @@ footer {
 
 /*social media*/
 .fa {
-    
-    font-size: 30px;
-    width: 50px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 50%;
-    display: block;
+  padding-right: 5px;
+  padding-top:5px;
+  padding-bottom: 5px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
 }
 
 .fa:hover {
@@ -78,5 +84,33 @@ footer {
  
 }
 
+/* responsive */
 
+@media only screen and (max-width: 991px) {
+    
+    .about-us-panel{
+        width:100%;
+        margin-left:10px;
+        margin-right:10px;
+    }
+}
 
+@media only screen and (max-width: 767px) {
+
+    .about-us-img{
+        width:100%;
+        margin:auto;
+        height:300px;
+        
+    }
+    
+    .col-md-6 .p{
+        padding-left:5px;
+        padding-right:5px;
+    }
+    
+    .col-md-6{
+        margin-bottom:10px;
+    }
+    
+}

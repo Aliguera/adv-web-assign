@@ -50,7 +50,7 @@ $css_page = "<link rel='stylesheet' href='includes/css/login-be-helped.css'>";
                        </div>
                        <div class="form-group">
                            <label for="password">Password</label>
-                           <input class="form-control" type="password" name="password" id="password" placeholder="Minimum 6 characters">
+                           <input class="form-control" type="password" name="password" id="password" placeholder="Type your password">
                        </div>
                        <button class="btn btn-danger" type="submit">Clear</button>
                        <button class="btn btn-primary" type="submit">Login</button>

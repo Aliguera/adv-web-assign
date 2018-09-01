@@ -2,12 +2,15 @@
     class Organization extends Database {
         public $organizations = array();
         public $organization_profile = array();
+        public $organization_details = array();
+        public $organization_needs = array();
+        public $organization_carousel = array();
         public $errors = array();
         public function __construct(){
             parent::__construct();
         }
         
-        public function create($email, $password, $name, $description, $abn, $address, $org_image){
+        public function create($email, $password, $name, $description, $abn, $address, $org_image, $phone){
             //create array to store errors
             $errors = array();
             //validate email
@@ -29,12 +32,12 @@
             if(count($errors) == 0){
                 //proceed and create account
                 $query = "INSERT INTO organizations
-                    (email, password, name, description, profile_image, abn, address, created_at)
+                    (email, password, name, description, profile_image, abn, address, phone, created_at)
                     VALUES
-                    (?, ?, ?, ?, ?, ?, ?, NOW())";
+                    (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 $statement = $this -> connection -> prepare($query);
-                $statement -> bind_param('sssssis', $email, $hash, $name, $description, $org_image, $abn, $address);
+                $statement -> bind_param('sssssiss', $email, $hash, $name, $description, $org_image, $abn, $address, $phone);
                 $success = $statement -> execute() ? true : false;
                 if ($success == false && $this -> connection -> errno == '1062') {
                     $errors['email'] = 'Email address already used';
@@ -101,7 +104,8 @@
                         description,
                         address,
                         abn,
-                        profile_image
+                        profile_image,
+                        phone
                         FROM `organizations`
                         WHERE email = ?";
                         
@@ -119,9 +123,88 @@
                 $abn = $organization['abn'];
                 $address = $organization['address'];
                 $profile_image = $organization['profile_image'];
-                array_push( $this -> organization_profile, $name, $description, $abn, $address, $profile_image);
+                $phone = $organization['phone'];
+                array_push( $this -> organization_profile, $name, $description, $abn, $address, $profile_image, $phone);
                 return $this -> organization_profile;
             }
         }
+        
+        public function getOrganizationDetails($id) {
+            $query = "  SELECT 
+                        name,
+                        description,
+                        address,
+                        phone
+                        FROM `organizations`
+                        WHERE organizations.id = ?";
+                        
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $id);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            while( $row = $result -> fetch_assoc() ) {
+                array_push( $this -> organization_details, $row );
+            }
+            
+            return $this -> organization_details;
+        }
+        
+        public function getOrganizationNeeds($id) {
+            $query = "  SELECT
+                        needs.id,
+                        needs.title,
+						needs.description,
+						needs.created_at
+                        FROM `organizations`
+                        INNER JOIN needs
+                        ON (organizations.id = needs.company_id_fk)
+                        WHERE organizations.id = ?
+                        ORDER BY created_at DESC";
+                        
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $id);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            while( $row = $result -> fetch_assoc() ) {
+                array_push( $this -> organization_needs, $row );
+            }
+            
+            return $this -> organization_needs;
+        }
+        
+        public function getCarouselImages($organization_id) {
+            $query = "SELECT
+                      title,
+                      description,
+                      carousel_image,
+                      active
+                      FROM
+                      organization_carousel_images
+                      WHERE
+                      organization_id_fk = ?";
+            
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $organization_id);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            while( $row = $result -> fetch_assoc() ) {
+                array_push( $this -> organization_carousel, $row );
+            }
+            
+            return $this -> organization_carousel;
+        }
+        
+        public function addCarouselImage($title, $description, $carousel_image, $active, $organization_id) {
+            $query = "INSERT INTO organization_carousel_images
+                    (title, description, carousel_image, active, organization_id_fk, created_at)
+                    VALUES
+                    (?, ?, ?, ?, ?,NOW())";
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+                $statement = $this -> connection -> prepare($query);
+                $statement -> bind_param('sssbs', $title, $description, $carousel_image, $active, $organization_id);
+                $success = $statement -> execute() ? true : false;
+                return $success;
+        }
+        
     }
 ?>

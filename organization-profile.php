@@ -16,6 +16,7 @@
   $abn = $organizationProfile[2];
   $address = $organizationProfile[3];
   $profile_image = $organizationProfile[4];
+  $phone = $organizationProfile[5];
   
   $page_title = "Organization Profile Page";
   $css_page = "<link rel='stylesheet' href='includes/css/organization-profile.css'>";
@@ -41,6 +42,8 @@
                 <p><?php echo $address?></p>
                 <h3>ABN</h3>
                 <p><?php echo $abn?></p>
+                <h3>Phone</h3>
+                <p><?php echo $phone?></p>
               </div>
             </div>
             

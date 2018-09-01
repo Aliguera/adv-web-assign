@@ -1,7 +1,14 @@
 /*nav*/
 .bgNavColor {
     background-color:#003366;
+    
 }
+
+.icon{
+    height:30px;
+    width:30px;
+}
+
 
 .nav-link-color {
     color: white;
@@ -10,6 +17,7 @@
 
 body {
     font-family: arial, sans-serif;
+    min-width: 389px;
 }
 
 /*Index Page*/
@@ -67,8 +75,54 @@ body {
     margin-left: 40%;
 }
 
+.img-size-div {
+  height: 0;
+  overflow: hidden;
+  padding-top: 66.6666%;
+  position: relative;
+  margin:20px 20px 0 20px;
+}
+
+.img-size {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+    height: 100%;
+}
+
+/*footer*/
+
 footer {
     background-color:#003366;
     color: white;
     
+}
+
+@media only screen and (max-width: 991px) {
+    .card {
+        margin-left: 30%;
+    }
+    
+    .col-lg-4 {
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .card {
+        margin:auto;
+    }
+    
+    .col-lg-4 {
+        margin-top: 30px;
+    }
+    
+    .img-fluid {
+        margin-top: 30px;
+    }
 }

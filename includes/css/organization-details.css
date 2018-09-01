@@ -8,9 +8,22 @@
     font-family: arial;
 }
 
+.icon{
+    height:30px;
+    width:30px;
+}
+
 /*body*/
 body {
     font-family: arial, sans-serif;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.need-description {
+    padding: 15px;
 }
 
 /*organization details*/
