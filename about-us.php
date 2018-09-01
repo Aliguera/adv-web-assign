@@ -46,8 +46,8 @@
                 <a href="#" class="fa fa-instagram"></a>
                 &nbsp;&nbsp;
                 <a href="#" class = "fa fa-linkedin"></a>
-
             </div>
+            
             <div class="col-md-6">
                 <img class="img rounded about-us-img" src="images/home/about-us-victor.jpg">
                 <h3 class="set-text-middle">Victor</h3>
@@ -60,9 +60,9 @@
                 </p>
                 <h4 class="set-text-middle" >Social Network</h4>
                 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#" class="fa fa-instagram"> Instagram</a>
+                <a href="#" class="fa fa-instagram"></a>
                 &nbsp;&nbsp;
-                <a href="#" class = "fa fa-linkedin"> Linkedin</a>
+                <a href="#" class = "fa fa-linkedin"></a>
 
             </div>
         </div>

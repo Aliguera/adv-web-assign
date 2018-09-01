@@ -120,5 +120,32 @@
                 return true;
             }
         }
+        
+        public function setUserNeed($need_id) {
+            $query = "SELECT id
+                      FROM users
+                      WHERE email = ?";
+            
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $_SESSION['user_email']);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            $account = $result -> fetch_assoc();
+            $user_id = $account['id'];
+            
+            $user_id_int = (int)$user_id;
+            $need_id_int = (int)$need_id;
+            
+            $query2 = "INSERT INTO users_needs_helps(user_id_fk, need_id_fk)
+                       VALUES (?, ?)";
+            $statement2 = $this -> connection -> prepare($query2);
+            $statement2 -> bind_param('ii', $user_id_int, $need_id_int);
+            $success2 = $statement2 -> execute() ? true : false;
+            if ($success2 == false) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$page_title = "Help People";
+$page_title = "Help2Day";
 $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
 ?>
 <!doctype html>
