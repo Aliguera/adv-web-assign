@@ -30,18 +30,13 @@
   //need id took from the url when ajax takes the I can help button id
   $need_id_url = $_GET['need_id'];
   
-  if (isset($need_id_global)) {
+  if (isset($need_id_url)) {
     executeUserNeed($need_id_url);
   }
   
   function executeUserNeed($need_id) {
     $user_need_obj = new Account();
     $user_need = $user_need_obj -> setUserNeed($need_id);
-    header("Refresh:0");
-  }
-  
-  if (array_key_exists('interestSubmit', $_POST)) {
-    executeUserInterest();
   }
   
   $page_title = "Organization Details Page";
@@ -103,6 +98,7 @@
               <p><?php echo $organization_details[0]['address'] ?></p>
               <h3>Phone</h3>
               <p><?php echo $organization_details[0]['phone'] ?></p>
+              <div class="alert alert-success d-none" role="alert"><h4 class="alert-heading">You are interested in help <?php echo $organization_details[0]['name']?></h4><p>Please, wait patient till the organization reply your interest in help.<br>Thanks.</p></div>
               <?php
                 if (!$_SESSION['organization_email']) {
                                 echo"
@@ -112,7 +108,7 @@
               ?>
               </div>
               
-              <div class="needs-list">
+              <div class="needs-list d-none">
                 <h3>Needs List</h3>
                 <?php
                   if ($_SESSION['organization_email']) {

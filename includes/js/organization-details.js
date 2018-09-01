@@ -1,9 +1,11 @@
 $(document).ready(
     function() {
+        //About us and need list tabs (shows and hides)
         $(".needs-list").hide();
         
         $(".needs-list-button").click(function() {
             $(".about-us").hide();
+            $(".needs-list").removeClass("d-none");
             $(".needs-list").show();
         });
         
@@ -12,23 +14,31 @@ $(document).ready(
             $(".about-us").show();
         });
         
+        //i can help button clicked function
         $(".need-button").on("click", function (event) {
             $.ajax({
               type: "POST",
               url: "organization-details.php?need_id=" + event.target.id,
               success: function() {
+                  $("#" + event.target.id).addClass("disabled");
                   console.log("success!");
               }
             });
         });
         
+        //interested button clicked function
         $(".interested-button").on("click", function (event) {
             $.ajax({
               type: "POST",
               url: "organization-details.php?organization_id=" + event.target.id,
               success: function() {
-                  $(".interested-button").append("disabled");
-                  $(".interested-button").parent().append("aee");
+                  $(".interested-button").addClass("disabled");
+                  $(".interested-button").prev().fadeIn(800);
+                  $(".interested-button").prev().removeClass("d-none");
+                  
+                  setTimeout(function() {
+                      $(".interested-button").prev().fadeOut(800);
+                  }, 10000);
               }
             });
         });
