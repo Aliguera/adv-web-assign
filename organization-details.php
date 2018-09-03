@@ -8,13 +8,15 @@
   $orgns = new Organization();
   $organization_details = $orgns -> getOrganizationDetails($id);
   
-  $organization_needs = $orgns -> getOrganizationNeeds($id);
-  
   $organization_carousel = $orgns -> getCarouselImages($id);
   $org_carousel_length = count($organization_carousel);
   
   $user = new Account();
   $user_interest_check = $user -> checkUserInterest($id);
+  
+  $user_id = $user -> getUserId();
+  
+  $organization_needs = $orgns -> getOrganizationNeedsUser($id, $user_id);
   
   function executeUserInterest($organization_id) {
     $user_interest_obj = new Account();
@@ -126,14 +128,28 @@
                           $need_id = $item['id'];
                           $need_title = $item['title'];
                           $need_description = $item['description'];
+                          $created_at = $item['created_at'];
+                          $user_id_fk = $item['user_id_fk'];
+                          
+                          echo "<div class=\"alert alert-success mt-4 mb-0 d-none\" role=\"alert\">
+                                  The organization "; echo $organization_details[0]['name']; echo " has received your help! They will get in contact with you ASAP. Thanks!
+                                </div>";
                           
                           echo "<div class=\"card\">
                                   <div class=\"card-header\">
                                     $need_title ";
+                                    
                           if (!$_SESSION['organization_email']) {
-                              echo"
+                              if (!$user_id_fk) {
+                                echo"
                                     <button id=\"$need_id\" class=\"btn btn-info float-right need-button\">I can help</button>
                                    ";
+                              } else {
+                                echo"
+                                    <button id=\"$need_id\" class=\"btn btn-info float-right need-button\" disabled>I can help</button>
+                                   ";
+                              }
+                              
                           }
                           echo "</div>
                           <p class=\"need-description\">$need_description</p>

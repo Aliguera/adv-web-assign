@@ -4,7 +4,10 @@
         public $organization_profile = array();
         public $organization_details = array();
         public $organization_needs = array();
+        public $organization_needs_user = array();
+        public $organization_needs_new = array();
         public $organization_carousel = array();
+        public $organization_profile_needs = array();
         public $errors = array();
         public function __construct(){
             parent::__construct();
@@ -100,6 +103,7 @@
         
         public function getOrganizationProfile() {
             $query = "  SELECT 
+                        id,
                         name,
                         description,
                         address,
@@ -124,7 +128,8 @@
                 $address = $organization['address'];
                 $profile_image = $organization['profile_image'];
                 $phone = $organization['phone'];
-                array_push( $this -> organization_profile, $name, $description, $abn, $address, $profile_image, $phone);
+                $id = $organization['id'];
+                array_push( $this -> organization_profile, $name, $description, $abn, $address, $profile_image, $phone, $id);
                 return $this -> organization_profile;
             }
         }
@@ -149,27 +154,109 @@
             return $this -> organization_details;
         }
         
-        public function getOrganizationNeeds($id) {
-            $query = "  SELECT
-                        needs.id,
-                        needs.title,
-						needs.description,
-						needs.created_at
-                        FROM `organizations`
-                        INNER JOIN needs
-                        ON (organizations.id = needs.company_id_fk)
-                        WHERE organizations.id = ?
-                        ORDER BY created_at DESC";
-                        
+        public function getOrganizationNeeds($organization_id) {
+             $query =   "SELECT
+                                needs.id,
+                                needs.title,
+                                needs.description,
+                                needs.created_at
+                                FROM needs
+                                RIGHT JOIN organizations
+                                ON (needs.company_id_fk = organizations.id)
+                                WHERE
+                                organizations.id = ?
+                                ORDER BY needs.created_at DESC";
+                            
             $statement = $this -> connection -> prepare($query);
-            $statement -> bind_param('s', $id);
+            $statement -> bind_param('s', $organization_id);
             $statement -> execute();
             $result = $statement -> get_result();
             while( $row = $result -> fetch_assoc() ) {
-                array_push( $this -> organization_needs, $row );
+                array_push( $this -> organization_profile_needs, $row );
             }
             
-            return $this -> organization_needs;
+            return $this -> organization_profile_needs;
+        }
+        
+        public function getOrganizationNeedsUser($organization_id, $user_id) {
+                // $query =   "SELECT
+                //             needs.id,
+                //             needs.title,
+                //             needs.description,
+                //             needs.created_at,
+                //             users_needs_helps.created_at
+                //             FROM needs
+                //             LEFT JOIN users_needs_helps
+                //             ON (needs.id = users_needs_helps.need_id_fk)
+                //             RIGHT JOIN organizations
+                //             ON (needs.company_id_fk = organizations.id)
+                //             WHERE
+                //             organizations.id = ?
+                //             ORDER BY needs.created_at DESC";
+                
+    //             $query = "SELECT
+    //                         needs.id,
+    //                         needs.title,
+    //                         needs.description,
+    //                         needs.created_at,
+    //                         users_needs_helps.created_at,
+				// 			users_needs_helps.user_id_fk
+    //                         FROM needs
+    //                         LEFT JOIN users_needs_helps
+    //                         ON (needs.id = users_needs_helps.need_id_fk)
+    //                         RIGHT JOIN organizations
+    //                         ON (needs.company_id_fk = organizations.id)
+    //                         WHERE
+    //                         organizations.id = ?
+    //                         ORDER BY needs.created_at DESC";
+    
+                    $query = "  SELECT needs.id, needs.title, needs.description, needs.created_at, users_needs_helps.user_id_fk FROM users_needs_helps
+                                RIGHT JOIN
+                                needs
+                                ON users_needs_helps.need_id_fk = needs.id
+                                WHERE needs.company_id_fk = ? AND users_needs_helps.user_id_fk = ?
+                                ORDER BY needs.created_at DESC";
+                        
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('ss', $organization_id, $user_id);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            while( $row = $result -> fetch_assoc() ) {
+                array_push( $this -> organization_needs_user, $row );
+            }
+            
+            $query2 = "         SELECT needs.id, needs.title, needs.description, needs.created_at FROM needs
+                                RIGHT JOIN
+                                organizations
+                                ON needs.company_id_fk = organizations.id
+                                WHERE needs.company_id_fk = ?
+                                ORDER BY needs.created_at DESC";
+                        
+            $statement2 = $this -> connection -> prepare($query2);
+            $statement2 -> bind_param('s', $organization_id);
+            $statement2 -> execute();
+            $result2 = $statement2 -> get_result();
+            while( $row2 = $result2 -> fetch_assoc() ) {
+                array_push( $this -> organization_needs, $row2 );
+            }
+            
+            for ($i = 0; $i < count($this -> organization_needs_user); $i++) {
+                $key = array_search($this -> organization_needs_user[$i]['title'], array_column($this -> organization_needs, 'title'));
+                array_splice($this -> organization_needs, $key, 1);
+            }
+        
+            
+            for ($i = 0; $i < count($this -> organization_needs); $i++) {
+                array_push($this -> organization_needs_new, $this -> organization_needs[$i]);
+            }
+            
+            for ($i = 0; $i < count($this -> organization_needs_user); $i++) {
+                array_push($this -> organization_needs_new, $this -> organization_needs_user[$i]);
+            }
+            
+            // $organization_needs_user
+            
+            return $this -> organization_needs_new;
         }
         
         public function getCarouselImages($organization_id) {

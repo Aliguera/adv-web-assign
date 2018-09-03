@@ -66,6 +66,20 @@
                       }
         }
         
+        public function getUserId() {
+            $query = "SELECT id
+                      FROM users
+                      WHERE email = ?";
+            
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $_SESSION['user_email']);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            $account = $result -> fetch_assoc();
+            $user_id = $account['id'];
+            return $user_id;
+        }
+        
         public function setUserInterest($organization_id) {
             $query = "SELECT id
                       FROM users

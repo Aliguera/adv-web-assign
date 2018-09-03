@@ -14,18 +14,6 @@ $(document).ready(
             $(".about-us").show();
         });
         
-        //i can help button clicked function
-        $(".need-button").on("click", function (event) {
-            $.ajax({
-              type: "POST",
-              url: "organization-details.php?need_id=" + event.target.id,
-              success: function() {
-                  $("#" + event.target.id).addClass("disabled");
-                  console.log("success!");
-              }
-            });
-        });
-        
         //interested button clicked function
         $(".interested-button").on("click", function (event) {
             $.ajax({
@@ -39,6 +27,24 @@ $(document).ready(
                   setTimeout(function() {
                       $(".interested-button").prev().fadeOut(800);
                   }, 10000);
+              }
+            });
+        });
+        
+        //i can help button clicked function
+        $(".need-button").on("click", function (event) {
+            $.ajax({
+              type: "POST",
+              url: "organization-details.php?need_id=" + event.target.id,
+              success: function() {
+                  $("#" + event.target.id).addClass("disabled");
+                  $("#" + event.target.id).parent().parent().prev().fadeIn(800);
+                  $("#" + event.target.id).parent().parent().prev().removeClass("d-none");
+                  
+                  setTimeout(function() {
+                      $("#" + event.target.id).parent().parent().prev().fadeOut(800);
+                  }, 10000);
+                  console.log(event.target.id);
               }
             });
         });
