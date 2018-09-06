@@ -70,7 +70,8 @@ $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
                 <img src="images/home/about-us-victor.jpg" class="img-fluid" alt="Responsive image">
               </div>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui totam voluptates officiis nisi odio, incidunt tempora. Iure repellat nesciunt molestias eos magnam itaque, eveniet, sed magni ipsam eum perspiciatis repellendus.</p>
+            <p>Help2day is a trusted online platform that connects health care and aged care institutions with volunteers from the community who are willing to provide assistance to aged clients, patients, kids etc.</p>
+            <p></p>
           </div>
         </div>
         <div class="container" id="learn">
@@ -78,17 +79,17 @@ $css_page = "<link rel='stylesheet' href='includes/css/index.css'>";
           <div class="needs-help-box">
             <h3 class="text-center">Sick People</h3>
             <img src="images/home/sick-people-home.png" class="rounded-circle" alt="Cinque Terre">
-            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eligendi ea voluptatibus laudantium, magnam enim praesentium est quam, et vero obcaecati odit voluptas vitae reiciendis qui rem mollitia expedita quod.</p>
+            <p class="text-center">Choosing to donate your time to others by visiting them is a rewarding experience </p>
           </div>
           <div class="needs-help-box">
             <h3 class="text-center">Poor People</h3>
             <img src="images/home/poor-people-home.jpg" class="rounded-circle" alt="Cinque Terre">
-            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eligendi ea voluptatibus laudantium, magnam enim praesentium est quam, et vero obcaecati odit voluptas vitae reiciendis qui rem mollitia expedita quod.</p>
+            <p class="text-center">Choosing to donate your unwanted goods can make an enormous difference to someone else's life</p>
           </div>
           <div class="needs-help-box">
             <h3 class="text-center">Old People</h3>
             <img src="images/home/old-people-home.jpg" class="rounded-circle" alt="Cinque Terre">
-            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eligendi ea voluptatibus laudantium, magnam enim praesentium est quam, et vero obcaecati odit voluptas vitae reiciendis qui rem mollitia expedita quod.</p>
+            <p class="text-center">Choosing to donate your time to visit an older person in their home or nursing home on a regular basis</p>
           </div>
         </div>
         <?php

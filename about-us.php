@@ -26,6 +26,8 @@
             <!--aaa-->
             <h1 class="set-text-middle">About</h1>
             <p>At Help2day, we all come to work every day because we want to solve the biggest problem in our community.</p>
+            <p>Our website is an online platform which allow health care and aged care institutions to look for volunteers from the community who are willing to provide assistance to aged clients,patients, kids etc.</p>
+            <p>We can provide you volunteering opportunities such as visting patients, making donations, looking after eldly, or just simply talking to others could make an enormous difference in our community. </p>
             <img class="about-us-img" src="/images/can_help.jpg">
         </div>
 
@@ -40,7 +42,9 @@
                 <h3 class="set-text-middle">Alick</h3>
                 <p class="set-text-middle">Bachelor of Information Technology</p>
                 <br>
-                <p>I am a </p>
+                <p>I am a 28 year old Web Programmer and Eletrical Engineer based in Sydney.
+                I have 3 years of experiences in Web Development and have built products both
+                on my own and on a team. Currently I am a Full Stack Web developer at Help2day, where I build products to help people who is in need.</p>
                 <h4 class="set-text-middle" >Social Network</h4>
                 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="#" class="fa fa-instagram"></a>

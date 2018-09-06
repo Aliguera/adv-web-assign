@@ -11,16 +11,23 @@
   
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         //handle need register here
-        $organization = new Organization();
+        $orgns = new Organization();
         //receive post variables from form
         $title = $_POST['title'];
         $description = $_POST['description'];
         
+        $organizationNeed = $orgns -> addNeed($title, $description);
+  
+        if ($organizationNeed) {
+            $message = "The need has been succesfully created";
+            $alert = "success";
+        } else {
+            $message = "The need could not be created, try again later";
+            $alert = "warning";
+        }
+        
   }
   
-  $orgns = new Organization();
-  $organizationNeed = $orgns -> addNeed($title, $description);
-  echo $organizationNeed;
   
   $page_title = "Register Need Page";
   $css_page = "<link rel='stylesheet' href='includes/css/organization-register-need.css'>";
@@ -35,8 +42,19 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4 offset-md-4">
+                    <?php
+                    
+                        if( $message ) {
+                            echo "  
+                                    <div class=\"alert alert-$alert\" role=\"alert\">
+                                        $message
+                                    </div>
+                                 ";
+                        }
+                    
+                    ?>
                     <form id="organization-need-form" method="post" action="organization-register-need.php">
-                       <h3>Register a need</h3>
+                       <h3>Register a Need</h3>
                        <div class="form-group">
                            <label for="title">Title</label>
                            <input class="form-control" name="title" id="title" placeholder="Type the need title E.g Clothes">

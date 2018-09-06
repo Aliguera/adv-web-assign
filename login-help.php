@@ -36,11 +36,11 @@ $css_page = "<link rel='stylesheet' href='includes/css/login-help.css'>";
                     <?php
                         if( $message ) {
                             echo "<div class=\"alert alert-$message_class alert-dismissable fade show mt-3\">
-                                    $message
-                                    <button class=\"close\" data-dismiss=\"alert\"&times;>
+                                      $message
+                                      <button class=\"close\" data-dismiss=\"alert\"&times;>
                                         
-                                    </button>
-                                </div>";
+                                      </button>
+                                  </div>";
                         }
                     ?>
                     <form id="login-form" method="post" action="login-help.php">

@@ -44,7 +44,7 @@
                           
                           echo "<div class=\"card\">
                                   <div class=\"card-header\">
-                                    $need_title <button class=\"btn btn-secondary float-right\">Edit</button></h1>
+                                    $need_title <button class=\"btn btn-danger float-right ml-3\" id=\"delete-$need_id\">Delete</button><button class=\"btn btn-secondary float-right\">Edit</button></h1>
                                   </div>
                                   <p>$need_description</p>
                                   <div id=\"accordion$need_id\">
@@ -55,7 +55,8 @@
                                           </h5>
                                         </div>
                                         <div id=\"collapse$need_id\" class=\"collapse\" aria-labelledby=\"heading$need_id\" data-parent=\"#accordion$need_id\">
-                                          <div class=\"card-body\">
+                                          ";if (count($users_needs) > 0) {
+                                            echo"<div class=\"card-body\">
                                             <table class=\"table table-striped\">
                                                 <thead>
                                                   <tr>
@@ -75,8 +76,12 @@
                                                   
                                                 echo "</tbody>
                                               </table>
-                                          </div>
-                                        </div>
+                                          </div>";
+                                          } else {
+                                            echo "<p style=\"text-align: center; font-weight: bold\">No volunteers yet</p>";
+                                          }
+                                          
+                                        echo "</div>
                                       </div>
                                     </div>
                                 </div>";
