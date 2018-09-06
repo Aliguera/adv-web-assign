@@ -1,6 +1,7 @@
 <?php
     class Account extends Database {
         public $errors = array();
+        public $user_needs_info = array();
         public function __construct(){
             parent::__construct();
         }
@@ -160,6 +161,26 @@
             } else {
                 return true;
             }
+        }
+        
+        public function getUserNeedsInfo($need_id) {
+            $query = "
+                        SELECT users.fullname, users.email
+                        FROM users
+                        INNER JOIN users_needs_helps
+                        ON users.id = users_needs_helps.user_id_fk
+                        WHERE users_needs_helps.need_id_fk = ?
+            ";
+            
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('i', $need_id);
+            $success = $statement -> execute();
+            $result = $statement -> get_result();
+            while( $row = $result -> fetch_assoc() ) {
+                array_push( $this -> user_needs_info, $row );
+            }
+            
+            return $this -> user_needs_info;            
         }
     }
 ?>
