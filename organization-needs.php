@@ -7,7 +7,7 @@
   
   //include autoloader
   include('autoloader.php');
-  //create instance of products class
+  //create instance of organizations class
   
   $orgns = new Organization();
   $organizationProfile = $orgns -> getOrganizationProfile();
@@ -17,6 +17,13 @@
   $abn = $organizationProfile[2];
   $address = $organizationProfile[3];
   $id = $organizationProfile[6];
+  
+  $need_id_url = $_GET['need_id'];
+  
+  if(isset($need_id_url)) {
+    $orgns2 = new Organization();
+    $need_deleted_success = $orgns2 -> deleteNeed($need_id_url);
+  }
   
   $organization_needs = $orgns -> getOrganizationNeeds($id);
   
@@ -44,7 +51,7 @@
                           
                           echo "<div class=\"card\">
                                   <div class=\"card-header\">
-                                    $need_title <button class=\"btn btn-danger float-right ml-3\" id=\"delete-$need_id\">Delete</button><button class=\"btn btn-secondary float-right\">Edit</button></h1>
+                                    $need_title <button class=\"btn btn-danger float-right ml-3\" id=\"delete-$need_id\">Delete</button><a href=\"organization-edit-need.php?need_id=$need_id\"><button class=\"btn btn-secondary float-right\">Edit</button></a></h1>
                                   </div>
                                   <p>$need_description</p>
                                   <div id=\"accordion$need_id\">

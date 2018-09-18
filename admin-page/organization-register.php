@@ -116,7 +116,7 @@ $css_page = "<link rel='stylesheet' href='../includes/css/organization-register.
                            <label>Organization Profile Picture</label>
                            <input type="file" name="org_image" id="org_image">
                        </div>
-                       <button class="btn btn-danger" type="submit">Clear</button>
+                       <button class="btn btn-danger">Clear</button>
                        <button class="btn btn-primary" type="submit">Submit</button>
                     </form>
                 </div>

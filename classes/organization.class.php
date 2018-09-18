@@ -164,7 +164,7 @@
                                 RIGHT JOIN organizations
                                 ON (needs.company_id_fk = organizations.id)
                                 WHERE
-                                organizations.id = ?
+                                organizations.id = ? AND needs.active = 1
                                 ORDER BY needs.created_at DESC";
                             
             $statement = $this -> connection -> prepare($query);
@@ -184,7 +184,7 @@
                                 RIGHT JOIN
                                 needs
                                 ON users_needs_helps.need_id_fk = needs.id
-                                WHERE needs.company_id_fk = ? AND users_needs_helps.user_id_fk = ?
+                                WHERE needs.company_id_fk = ? AND users_needs_helps.user_id_fk = ? AND needs.active = 1
                                 ORDER BY needs.created_at DESC";
                         
             $statement = $this -> connection -> prepare($query);
@@ -199,7 +199,7 @@
                                 RIGHT JOIN
                                 organizations
                                 ON needs.company_id_fk = organizations.id
-                                WHERE needs.company_id_fk = ?
+                                WHERE needs.company_id_fk = ? AND needs.active = 1
                                 ORDER BY needs.created_at DESC";
                         
             $statement2 = $this -> connection -> prepare($query2);
@@ -263,6 +263,19 @@
                 return $success;
         }
         
+        public function getNeed($id) {
+            $query = "SELECT title, description
+                      FROM needs
+                      WHERE id = ?";
+                      
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $id);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            $row = $result -> fetch_assoc();
+            return $row;
+        }
+        
         public function addNeed($title, $description) {
             $query = "SELECT id
                       FROM organizations
@@ -283,6 +296,41 @@
             $statement2 -> bind_param('ssi', $title, $description, $company_id_fk);
             $success = $statement2 -> execute() ? true : false;
             return $success;
+        }
+        
+        public function deleteNeed($need_id) {
+            $query = "UPDATE needs
+                      SET active = 0
+                      WHERE id = ?";
+                      
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('i', $need_id);
+            $success = $statement -> execute() ? true : false;
+            return $success;
+        }
+        
+        public function updateNeed($id, $title, $description) {
+            $query = "UPDATE needs
+                      SET title = ?, description = ?
+                      WHERE id = ?";
+                      
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('ssi', $title, $description, $id);
+            $success = $statement -> execute() ? true : false;
+            return $success;
+        }
+        
+        public function getOrganizationId() {
+            $query = "SELECT id
+                      FROM organizations
+                      WHERE email = ?";
+                      
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $_SESSION['organization_email']);
+            $success = $statement -> execute();
+            $result = $statement -> get_result();
+            $organization = $result -> fetch_assoc();
+            return $organization['id'];
         }
         
     }

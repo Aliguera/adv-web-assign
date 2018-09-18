@@ -1,0 +1,30 @@
+/*nav*/
+.bgNavColor {
+    background-color:#003366 !important;
+}
+
+.nav-link-color {
+    color: white;
+    font-family: arial;
+}
+
+.icon{
+    height:30px;
+    width:30px;
+}
+
+/*body*/
+body {
+    font-family: arial, sans-serif;
+}
+
+/*organization-edit-need*/
+
+
+/*footer*/
+footer {
+    background-color:#003366;
+    color: white;
+    margin-top: 50px;
+    width:100%;
+}

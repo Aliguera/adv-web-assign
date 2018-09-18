@@ -1,6 +1,10 @@
 <?php
   session_start();
   
+  if (!$_SESSION['organization_email']) {
+      header("location: login.php");
+  }
+  
   $id = $_GET['id'];
   //include autoloader
   include('autoloader.php');
@@ -52,37 +56,40 @@
     <body style="padding-top: 64px;">
         <?php include('includes/navbar.php') ?>
         <div class="container">
-            <div id="organizationCarousel" class="carousel slide <?php if ($org_carousel_length == 0) { echo "d-none"; }?>" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <?php 
-                  foreach( $organization_carousel as $item ) {
+            <?php 
+            echo "<div id=\"carouselExampleIndicators\" class=\"carousel slide"; if ($org_carousel_length == 0) { echo " d-none"; } echo"\" data-ride=\"carousel\">
+              <ol class=\"carousel-indicators\">";
+                  foreach( $organization_carousel as $i => $item ) {
                     $active = $item['active'];
-                    echo "<li data-target=\"#organizationCarousel\" data-slide-to=\""; echo key($item); echo"\" class=\""; if($active == 1) { echo "active"; } echo"\"></li>";
-                  }?>
-              </ol>
-              <div class="carousel-inner">
-                <?php foreach( $organization_carousel as $item ) {
+                    echo "<li data-target=\"#organizationCarousel\" data-slide-to=\""; echo $i; echo"\" class=\""; if($active == 1) { echo "active"; } echo"\"></li>";
+                  }
+              echo "</ol>
+              <div class=\"carousel-inner\">";
+                foreach( $organization_carousel as $item ) {
+                  $active = $item['active'];
                   $title = $item['title'];
                   $description = $item['description'];
                   $carousel_image = $item['carousel_image'];
-                  echo "<div class\"carousel-item"; if($active == 1) { echo "active"; } echo"\">
-                          <img class=\"d-block w-100\" src=\"images/organizations/carousel/$carousel_image\" alt=\"$title\">
-                          <div class=\"carousel-caption d-none d-md-block\">
-                            <h3>$title</h3>
-                            <p>$description</p>
-                          </div>
-                        </div>";
-                }?>
-              </div>
-              <a class="carousel-control-prev <?php if ($org_carousel_length == 1) { echo "d-none"; }?>" href="#organizationCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
+                    echo "<div class=\"carousel-item "; if($active == 1) { echo "active"; } echo "\">
+                      <div class=\"img-size-div\">
+                        <img class=\"d-block w-100 img-size\" src=\"images/organizations/carousel/$carousel_image\" alt=\"Second slide\">
+                      </div>
+                      <div class=\"carousel-caption d-none d-md-block\">
+                        <h5>$title</h5>
+                        <p>$description</p>
+                      </div>
+                    </div>";
+                  }
+              echo "</div>
+              <a class=\"carousel-control-prev "; if ($org_carousel_length == 1) { echo "d-none"; } echo "\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"prev\">
+                <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>
+                <span class=\"sr-only\">Previous</span>
               </a>
-              <a class="carousel-control-next <?php if ($org_carousel_length == 1) { echo "d-none"; }?>" href="#organizationCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
+              <a class=\"carousel-control-next "; if ($org_carousel_length == 1) { echo "d-none"; } echo "\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"next\">
+                <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>
+                <span class=\"sr-only\">Next</span>
               </a>
-            </div>
+            </div>"; ?>
             
             <h1 class="text-center"><?php echo $organization_details[0]['name'] ?></h1>
             <div class="btn-group btn-group-toggle mr-5" data-toggle="buttons">
