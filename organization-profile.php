@@ -49,6 +49,7 @@
             
             <hr>
             <a href="organization-needs.php"><button class="btn btn-primary" type="button">Needs List</button></a>
+            <a href="organization-carousel.php"><button class="btn btn-primary" type="button">Carousel Settings</button></a>
         </div>
         <?php
             include('includes/footer.php');

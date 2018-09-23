@@ -113,10 +113,10 @@ $css_page = "<link rel='stylesheet' href='../includes/css/organization-register.
                            <input class="form-control" name="phone" id="phone" placeholder="+61 477777777">
                        </div>
                        <div class="form-group">
-                           <label>Organization Profile Picture</label>
+                           <label>Organization Logo Picture</label>
                            <input type="file" name="org_image" id="org_image">
                        </div>
-                       <button class="btn btn-danger" type="submit">Clear</button>
+                       <button class="btn btn-danger">Clear</button>
                        <button class="btn btn-primary" type="submit">Submit</button>
                     </form>
                 </div>

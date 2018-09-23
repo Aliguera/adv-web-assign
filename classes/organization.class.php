@@ -4,7 +4,10 @@
         public $organization_profile = array();
         public $organization_details = array();
         public $organization_needs = array();
+        public $organization_needs_user = array();
+        public $organization_needs_new = array();
         public $organization_carousel = array();
+        public $organization_profile_needs = array();
         public $errors = array();
         public function __construct(){
             parent::__construct();
@@ -100,6 +103,7 @@
         
         public function getOrganizationProfile() {
             $query = "  SELECT 
+                        id,
                         name,
                         description,
                         address,
@@ -124,7 +128,8 @@
                 $address = $organization['address'];
                 $profile_image = $organization['profile_image'];
                 $phone = $organization['phone'];
-                array_push( $this -> organization_profile, $name, $description, $abn, $address, $profile_image, $phone);
+                $id = $organization['id'];
+                array_push( $this -> organization_profile, $name, $description, $abn, $address, $profile_image, $phone, $id);
                 return $this -> organization_profile;
             }
         }
@@ -149,27 +154,79 @@
             return $this -> organization_details;
         }
         
-        public function getOrganizationNeeds($id) {
-            $query = "  SELECT
-                        needs.id,
-                        needs.title,
-						needs.description,
-						needs.created_at
-                        FROM `organizations`
-                        INNER JOIN needs
-                        ON (organizations.id = needs.company_id_fk)
-                        WHERE organizations.id = ?
-                        ORDER BY created_at DESC";
-                        
+        public function getOrganizationNeeds($organization_id) {
+             $query =   "SELECT
+                                needs.id,
+                                needs.title,
+                                needs.description,
+                                needs.created_at
+                                FROM needs
+                                RIGHT JOIN organizations
+                                ON (needs.company_id_fk = organizations.id)
+                                WHERE
+                                organizations.id = ? AND needs.active = 1
+                                ORDER BY needs.created_at DESC";
+                            
             $statement = $this -> connection -> prepare($query);
-            $statement -> bind_param('s', $id);
+            $statement -> bind_param('s', $organization_id);
             $statement -> execute();
             $result = $statement -> get_result();
             while( $row = $result -> fetch_assoc() ) {
-                array_push( $this -> organization_needs, $row );
+                array_push( $this -> organization_profile_needs, $row );
             }
             
-            return $this -> organization_needs;
+            return $this -> organization_profile_needs;
+        }
+        
+        public function getOrganizationNeedsUser($organization_id, $user_id) {
+    
+                    $query = "  SELECT needs.id, needs.title, needs.description, needs.created_at, users_needs_helps.user_id_fk FROM users_needs_helps
+                                RIGHT JOIN
+                                needs
+                                ON users_needs_helps.need_id_fk = needs.id
+                                WHERE needs.company_id_fk = ? AND users_needs_helps.user_id_fk = ? AND needs.active = 1
+                                ORDER BY needs.created_at DESC";
+                        
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('ss', $organization_id, $user_id);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            while( $row = $result -> fetch_assoc() ) {
+                array_push( $this -> organization_needs_user, $row );
+            }
+            
+            $query2 = "         SELECT needs.id, needs.title, needs.description, needs.created_at FROM needs
+                                RIGHT JOIN
+                                organizations
+                                ON needs.company_id_fk = organizations.id
+                                WHERE needs.company_id_fk = ? AND needs.active = 1
+                                ORDER BY needs.created_at DESC";
+                        
+            $statement2 = $this -> connection -> prepare($query2);
+            $statement2 -> bind_param('s', $organization_id);
+            $statement2 -> execute();
+            $result2 = $statement2 -> get_result();
+            while( $row2 = $result2 -> fetch_assoc() ) {
+                array_push( $this -> organization_needs, $row2 );
+            }
+            
+            for ($i = 0; $i < count($this -> organization_needs_user); $i++) {
+                $key = array_search($this -> organization_needs_user[$i]['title'], array_column($this -> organization_needs, 'title'));
+                array_splice($this -> organization_needs, $key, 1);
+            }
+        
+            
+            for ($i = 0; $i < count($this -> organization_needs); $i++) {
+                array_push($this -> organization_needs_new, $this -> organization_needs[$i]);
+            }
+            
+            for ($i = 0; $i < count($this -> organization_needs_user); $i++) {
+                array_push($this -> organization_needs_new, $this -> organization_needs_user[$i]);
+            }
+            
+            // $organization_needs_user
+            
+            return $this -> organization_needs_new;
         }
         
         public function getCarouselImages($organization_id) {
@@ -201,9 +258,79 @@
                     (?, ?, ?, ?, ?,NOW())";
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 $statement = $this -> connection -> prepare($query);
-                $statement -> bind_param('sssbs', $title, $description, $carousel_image, $active, $organization_id);
+                $statement -> bind_param('sssis', $title, $description, $carousel_image, $active, $organization_id);
                 $success = $statement -> execute() ? true : false;
                 return $success;
+        }
+        
+        public function getNeed($id) {
+            $query = "SELECT title, description
+                      FROM needs
+                      WHERE id = ?";
+                      
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $id);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            $row = $result -> fetch_assoc();
+            return $row;
+        }
+        
+        public function addNeed($title, $description) {
+            $query = "SELECT id
+                      FROM organizations
+                      WHERE email = ?";
+            
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $_SESSION['organization_email']);
+            $statement -> execute();
+            $result = $statement -> get_result();
+            $organization = $result -> fetch_assoc();
+            $organization_id = $organization['id'];
+            $company_id_fk = (int)$organization_id;
+            
+            $query2 = "INSERT INTO needs(title, description, company_id_fk, created_at)
+                       VALUES(?, ?, ?, NOW())";
+                       
+            $statement2 = $this -> connection -> prepare($query2);
+            $statement2 -> bind_param('ssi', $title, $description, $company_id_fk);
+            $success = $statement2 -> execute() ? true : false;
+            return $success;
+        }
+        
+        public function deleteNeed($need_id) {
+            $query = "UPDATE needs
+                      SET active = 0
+                      WHERE id = ?";
+                      
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('i', $need_id);
+            $success = $statement -> execute() ? true : false;
+            return $success;
+        }
+        
+        public function updateNeed($id, $title, $description) {
+            $query = "UPDATE needs
+                      SET title = ?, description = ?
+                      WHERE id = ?";
+                      
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('ssi', $title, $description, $id);
+            $success = $statement -> execute() ? true : false;
+            return $success;
+        }
+        
+        public function getOrganizationId() {
+            $query = "SELECT id
+                      FROM organizations
+                      WHERE email = ?";
+                      
+            $statement = $this -> connection -> prepare($query);
+            $statement -> bind_param('s', $_SESSION['organization_email']);
+            $success = $statement -> execute();
+            $result = $statement -> get_result();
+            $organization = $result -> fetch_assoc();
+            return $organization['id'];
         }
         
     }

@@ -1,4 +1,4 @@
 SetEnv DBHOST localhost
 SetEnv DBNAME help_people
 SetEnv DBUSER aligao
-SetEnv DBPASSWORD
+SetEnv DBPASSWORD 96171696
