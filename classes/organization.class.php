@@ -258,7 +258,7 @@
                     (?, ?, ?, ?, ?,NOW())";
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 $statement = $this -> connection -> prepare($query);
-                $statement -> bind_param('sssbs', $title, $description, $carousel_image, $active, $organization_id);
+                $statement -> bind_param('sssis', $title, $description, $carousel_image, $active, $organization_id);
                 $success = $statement -> execute() ? true : false;
                 return $success;
         }

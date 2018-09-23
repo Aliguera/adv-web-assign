@@ -14,23 +14,6 @@ $(document).ready(
             $(".about-us").show();
         });
         
-        //interested button clicked function
-        $(".interested-button").on("click", function (event) {
-            $.ajax({
-              type: "POST",
-              url: "organization-details.php?organization_id=" + event.target.id,
-              success: function() {
-                  $(".interested-button").addClass("disabled");
-                  $(".interested-button").prev().fadeIn(800);
-                  $(".interested-button").prev().removeClass("d-none");
-                  
-                  setTimeout(function() {
-                      $(".interested-button").prev().fadeOut(800);
-                  }, 10000);
-              }
-            });
-        });
-        
         //i can help button clicked function
         $(".need-button").on("click", function (event) {
             $.ajax({

@@ -22,7 +22,6 @@
             //show success message
             $message = "Your account has been created!";
             $message_class = "success";
-            header("location: index.php");
         } else {
             //signup failed
             $message = implode('', $account -> errors);

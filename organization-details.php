@@ -1,7 +1,7 @@
 <?php
   session_start();
   
-  if (!$_SESSION['organization_email']) {
+  if (!$_SESSION['organization_email'] && !$_SESSION['user_email']) {
       header("location: login.php");
   }
   
@@ -21,17 +21,6 @@
   $user_id = $user -> getUserId();
   
   $organization_needs = $orgns -> getOrganizationNeedsUser($id, $user_id);
-  
-  function executeUserInterest($organization_id) {
-    $user_interest_obj = new Account();
-    $user_interest = $user_interest_obj -> setUserInterest($organization_id);
-  }
-  
-  //need id took from the url when ajax takes the I can help button id
-  $organization_id_url = $_GET['organization_id'];
-  if(isset($organization_id_url)) {
-    executeUserInterest($organization_id_url);
-  }
   
   //need id took from the url when ajax takes the I can help button id
   $need_id_url = $_GET['need_id'];
@@ -107,24 +96,13 @@
               <p><?php echo $organization_details[0]['address'] ?></p>
               <h3>Phone</h3>
               <p><?php echo $organization_details[0]['phone'] ?></p>
-              <div class="alert alert-success d-none" role="alert"><h4 class="alert-heading">You are interested in help <?php echo $organization_details[0]['name']?></h4><p>Please, wait patient till the organization reply your interest in help.<br>Thanks.</p></div>
-              <?php
-                if (!$_SESSION['organization_email']) {
-                                echo"
-                                       <button id=\"$id\" class=\"btn btn-primary interested-button\""; if ($user_interest_check == 1) {echo "disabled";} echo">Interested</button>
-                                     ";            
-                }
-              ?>
               </div>
               
               <div class="needs-list d-none">
-                <h3>Needs List</h3>
                 <?php
-                  if ($_SESSION['organization_email']) {
-                      
-                  }
                   //check if the company has needs then display content
                   if (sizeof($organization_needs) > 0) {
+                    echo "<h3>Needs List</h3>";
                     if (sizeof($organization_needs) > 1) {
                       echo "<h4>"; echo $organization_details[0]['name']; echo" has ", sizeof($organization_needs);echo" needs</h4>";
                     } else {
@@ -162,6 +140,8 @@
                           <p class=\"need-description\">$need_description</p>
                         </div>";
                         }
+                  } else {
+                    echo "<h5 class=\"text-center mt-5\">This organization doesn't have needs yet.</h5>";
                   }
                   
                  ?>

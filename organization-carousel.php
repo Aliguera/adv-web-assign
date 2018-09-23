@@ -15,6 +15,7 @@
     $organization_carousel = $orgns -> getCarouselImages($org_id);
     //get how many images the organization has
     $org_carousel_length = count($organization_carousel);
+    (boolean)$active; //carousel image active boolean
   
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         //handle sign up here
@@ -45,7 +46,15 @@
             
         }
         
-        $organization_carousel_boolean = $organization -> addCarouselImage($title, $description, $_FILES["carousel_image"]["name"], 0, $org_id);
+        if ($org_carousel_length == 0) {
+            echo"entrouuu";
+            $active = 1;
+        } else {
+            echo"naaao";
+            $active = 0;
+        }
+        
+        $organization_carousel_boolean = $organization -> addCarouselImage($title, $description, $_FILES["carousel_image"]["name"], $active, $org_id);
         if($organization_carousel_boolean == true) {
             //carousel image added
             header("Refresh:0");
